@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, Route, Redirect } from 'react-router-dom';
+import { Button, Form, Input, FormGroup } from 'react-bootstrap';
 
 const NavBar = props => {
     const setIsLoggedIn = props.setIsLoggedIn

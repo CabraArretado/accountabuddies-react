@@ -1,6 +1,6 @@
 import React, { useRef } from "react"
 import { useHistory, withRouter } from "react-router-dom"
-import { Button, Form, FormGroup } from 'reactstrap';
+import { Button, Form, Input, FormGroup } from 'react-bootstrap';
 
 import API from "../../modules/data_module"
 

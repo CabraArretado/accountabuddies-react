@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, Redirect } from "react-router-dom";
-import { Button, Form, Input, FormGroup } from 'reactstrap';
+import { Button, Form, Input, FormGroup } from 'react-bootstrap';
 
 // Mods
 import API from "../../modules/data_module"

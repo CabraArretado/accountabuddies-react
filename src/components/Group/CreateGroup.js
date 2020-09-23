@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react"
 import { withRouter } from "react-router-dom"
-import { Button, Form, Input, FormGroup, Label } from 'reactstrap';
+import { Button, Form, Input, FormGroup } from 'react-bootstrap';
 import API from "../../modules/data_module"
 
 
@@ -49,7 +49,7 @@ const CreateGroup = props => {
             <Form className="form--login" onSubmit={handleGroup}>
                 <h1 className="h3 mb-3 font-weight-normal">Create a group</h1>
                 <fieldset>
-                    <Label htmlFor="firstName"> Group's Title </Label>
+                    <label htmlFor="firstName"> Group's Title </label>
                     <input ref={title} type="text"
                         name="title"
                         className="form-control"
@@ -57,7 +57,7 @@ const CreateGroup = props => {
                         required autoFocus />
                 </fieldset>
                 <fieldset>
-                    <Label htmlFor="lastName"> Description </Label>
+                    <label htmlFor="lastName"> Description </label>
                     <input ref={description} type="text"
                         name="description"
                         className="form-control"
@@ -65,7 +65,7 @@ const CreateGroup = props => {
                         required />
                 </fieldset>
                 <fieldset>
-                    <Label htmlFor="size"> Group's size </Label>
+                    <label htmlFor="size"> Group's size </label>
                     <input ref={size} type="number" min="2" max="5"
                         required />
                 </fieldset>
