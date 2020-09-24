@@ -7,12 +7,15 @@ const NavBar = props => {
     const isAuthenticated = props.auth.isAuthenticated
     const logout = props.auth.logout
     const myGroups = props.myGroups
+    const profile = props.profile
 
     const handleLogout = () => {
         logout()
         setIsLoggedIn(false)
         props.history.push('/')
     }
+
+    console.log(props.profile)
 
 
     return <>
@@ -31,6 +34,9 @@ const NavBar = props => {
                     <>
                     <li className="nav-item">
                         <Link className="nav-link" to="/groups">Find Groups</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/my_profile">/my_profile</Link>
                     </li>
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -56,8 +62,10 @@ const NavBar = props => {
                 </ul>
                 <form className="form-inline my-2 my-lg-0">
                     {
-                        isAuthenticated() ?
+                        isAuthenticated() ? <>
+                            <a className="nav-link" href="/my_profile"> {profile.first_name} <span className="sr-only">(current)</span></a>
                             <button className="btn btn-outline-warning my-2 my-sm-0 mx-2" type="submit" onClick={handleLogout}>Logout</button>
+                            </>
                             :
                             <>
                                 <Link to="/login"><button className="btn btn-outline-success my-2 my-sm-0 mx-2" type="submit">Login</button></Link>
