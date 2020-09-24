@@ -114,12 +114,14 @@ function App() {
         console.log(i)
         setProfile(i[0].user)
         return i
+        } else {
+            setProfile({"id": "", "first_name":"", "last_name":"", "email":""})
         }
     }
 
     useEffect(()=>{
         getProfile()
-    }, [])
+    }, [loggedIn])
 
 
 
