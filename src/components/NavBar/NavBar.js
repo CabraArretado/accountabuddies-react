@@ -17,8 +17,6 @@ const NavBar = props => {
         props.history.push('/')
     }
 
-    console.log(profile)
-
 
     return <>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">

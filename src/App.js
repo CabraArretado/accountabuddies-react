@@ -7,6 +7,8 @@ import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import CssBaseline from '@material-ui/core/CssBaseline';
+
 import API from "./modules/data_module"
 
 
@@ -126,6 +128,7 @@ function App() {
 
     return (
         <>
+            <CssBaseline />
             <Router>
                 <Route render={props => (
                     <NavBar setIsLoggedIn={setIsLoggedIn} auth={auth} {...props} myGroups={myGroups}/>

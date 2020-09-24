@@ -23,6 +23,7 @@ const Register = props => {
     const lastName = useRef()
     const password = useRef()
 
+
     const register = props.auth.register
 
     const handleRegister = async (e) => {

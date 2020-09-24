@@ -45,6 +45,7 @@ const Login = props => {
                 <Link color="inherit" href="http://localhost:3000/">
                     Account-a-buddies
                 </Link>{' '}
+
                 {new Date().getFullYear()}
                 {'.'}
             </Typography>
