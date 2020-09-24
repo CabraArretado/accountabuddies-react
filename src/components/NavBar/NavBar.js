@@ -18,6 +18,7 @@ const NavBar = props => {
     }
 
 
+
     return <>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <a className="navbar-brand" href="/">account-a-buddies</a>
