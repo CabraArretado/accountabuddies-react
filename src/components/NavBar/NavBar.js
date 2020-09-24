@@ -6,6 +6,7 @@ const NavBar = props => {
     const setIsLoggedIn = props.setIsLoggedIn
     const isAuthenticated = props.auth.isAuthenticated
     const logout = props.auth.logout
+    const myGroups = props.myGroups
 
     const handleLogout = () => {
         logout()
@@ -26,36 +27,42 @@ const NavBar = props => {
                     <li className="nav-item active">
                         <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
                     </li>
+                    { isAuthenticated() ?
+                    <>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/my_groups">My Groups</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/groups">Groups</Link>
+                        <Link className="nav-link" to="/groups">Find Groups</Link>
                     </li>
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
+                            My Groups
                         </a>
                         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a className="dropdown-item" href="#">Action</a>
-                            <a className="dropdown-item" href="#">Another action</a>
+                            {
+                                myGroups.map(group => {
+                                    return <a key={group.id} className="dropdown-item" href={`/groups/${group.id}`}> {group.title} </a>
+                                })
+                            }
+                            {/* <a className="dropdown-item" href="#">Action</a>
+                            <a className="dropdown-item" href="#">Another action</a> */}
                             <div className="dropdown-divider"></div>
-                            <a className="dropdown-item" href="#">Something else here</a>
+                            <a className="dropdown-item" href="/create_group">Create New Group</a>
                         </div>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link disabled" href="#">Disabled</a>
                     </li>
+                    </>
+                    : null }
                 </ul>
                 <form className="form-inline my-2 my-lg-0">
                     {
                         isAuthenticated() ?
-                        <button className="btn btn-outline-warning my-2 my-sm-0 mx-2" type="submit" onClick={handleLogout}>Logout</button>
-                        :
-                        <>
-                            <Link to="/login"><button className="btn btn-outline-success my-2 my-sm-0 mx-2" type="submit">Login</button></Link>
-                            <Link to="/register"><button className="btn btn-outline-success my-2 my-sm-0 mx-2" type="submit">Register</button></Link>
-                        </>
+                            <button className="btn btn-outline-warning my-2 my-sm-0 mx-2" type="submit" onClick={handleLogout}>Logout</button>
+                            :
+                            <>
+                                <Link to="/login"><button className="btn btn-outline-success my-2 my-sm-0 mx-2" type="submit">Login</button></Link>
+                                <Link to="/register"><button className="btn btn-outline-success my-2 my-sm-0 mx-2" type="submit">Register</button></Link>
+                            </>
                     }
                 </form>
             </div>

@@ -14,11 +14,14 @@ import ForumMain from "./Forum/ForumMain"
 import PostDetails from "./Forum/PostDetails"
 import NewPostForm from "./Forum/NewPostForm"
 import TaskMain from "./Task/TaskMain"
+import Profile from "./Profile/Profile"
 
 const ApplicationViews = props => {
     const props_reference = props
     const myGroups = props.myGroups
     const myGroupsId = props.myGroupsId
+    const isAuthenticated = props_reference.auth.isAuthenticated
+
     /*
     TODO:
     - Access the group member only area: Got the check if the groupId requested is present in the myGroupsId array else redirect to sorry page
@@ -26,40 +29,97 @@ const ApplicationViews = props => {
 
     return (
     <>
+            {/* Router for: Create Group*/}
             <Route
                 exact path="/" render={props => {
                     return <Home {...props}/>
                 }} />
-                <Route
+
+            {/* Router for: Register */}
+            <Route
                 exact path="/register" render={props => {
                     return <Register {...props_reference} />
                 }}
             />
+
+            {/* Router for: Login */}
             <Route
                 exact path="/login" render={props => {
                     return <Login {...props_reference} />
                 }}
             />
+
+            {/* Router for: Search Groups */}
+            <Route
+                exact path="/my_profile" render={props => {
+                    if(isAuthenticated())
+                    {
+                        return <Profile myGroups={props_reference.myGroups} {...props_reference} />
+                    }
+                    else
+                    {
+                        return <Redirect to="/" new_error={"Please log in to access groups"}/>
+                    }
+                }}
+            />
+
+            {/* Router for: Search Groups */}
             <Route
                 exact path="/groups" render={props => {
-                    return <Groups getMyGroups={props_reference.getMyGroups} myGroups={props_reference.myGroups} {...props_reference} />
+                    if(isAuthenticated())
+                    {
+                        return <Groups getMyGroups={props_reference.getMyGroups} myGroups={props_reference.myGroups} {...props_reference} />
+                    }
+                    else
+                    {
+                        return <Redirect to="/" new_error={"Please log in to access groups"}/>
+                    }
                 }}
             />
+
+            {/* Router for: My Groups*/}
             <Route
                 exact path="/my_groups" render={props => {
-                    return <MyGroups {...props_reference} getMyGroups={props_reference.getMyGroups} myGroups={props_reference.myGroups} />
+                    if(isAuthenticated())
+                    {
+                        return <MyGroups {...props_reference} getMyGroups={props_reference.getMyGroups} myGroups={props_reference.myGroups} />
+                    }
+                    else
+                    {
+                        return <Redirect to="/" new_error={"Please log in to access groups"}/>
+                    }
                 }}
             />
+
+            {/* Router for: Create Group*/}
             <Route
                 exact path="/create_group" render={props => {
-                    return <CreateGroup getMyGroups={props_reference.getMyGroups} {...props_reference} />
+                    if(isAuthenticated())
+                    {
+                        return <CreateGroup getMyGroups={props_reference.getMyGroups} {...props_reference} />
+                    }
+                    else
+                    {
+                        return <Redirect to="/" new_error={"Please log in to access groups"}/>
+                    }
                 }}
             />
+
+            {/* Router for: Group Main Page */}
             <Route
                 exact path="/groups/:groupId(\d+)" render={props => {
-                    return <GroupPage getMyGroups={props_reference.getMyGroups} groupId={parseInt(props.match.params.groupId)} {...props} />
+                    if(isAuthenticated())
+                    {
+                        return <GroupPage getMyGroups={props_reference.getMyGroups} groupId={parseInt(props.match.params.groupId)} {...props} />
+                    }
+                    else
+                    {
+                        return <Redirect to="/" new_error={"Please log in to access groups"}/>
+                    }
                 }}
             />
+
+            {/* Router for: Forum Main Page */}
             <Route
                 exact path="/forum/:groupId(\d+)" render={props => {
                     let groupId = parseInt(props.match.params.groupId)
@@ -95,7 +155,7 @@ const ApplicationViews = props => {
                 }}
             />
 
-            {/* Router for: Forum New Post */}
+            {/* Router for: Tasks */}
             <Route
                 exact path="/tasks/group=:groupId(\d+)/" render={props => {
                     let groupId = parseInt(props.match.params.groupId)

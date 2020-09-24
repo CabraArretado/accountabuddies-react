@@ -7,6 +7,8 @@ import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import API from "./modules/data_module"
+
 
 
 function App() {
@@ -102,6 +104,18 @@ function App() {
         setMyGroupsId(myGroups.map(group => group.id))
     }, [myGroups])
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    /* Profile */
+    const [ profile, setProfile ] = useState({})
+    const getProfile = async () => {
+        const i = await  API.getCustom("account","myself=True")
+        setProfile(i.user)
+        return i
+    }
+
+    useEffect(()=>{
+        getProfile()
+    }, [])
 
 
 
@@ -112,7 +126,7 @@ function App() {
                     <NavBar setIsLoggedIn={setIsLoggedIn} auth={auth} {...props} myGroups={myGroups}/>
                 )} />
                 <div className="container" >
-                    <ApplicationViews auth={auth} loggedIn={loggedIn} myGroups={myGroups} getMyGroups={getMyGroups} myGroupsId={myGroupsId}/>
+                    <ApplicationViews profile={profile} setProfile={setProfile} auth={auth} loggedIn={loggedIn} myGroups={myGroups} getMyGroups={getMyGroups} myGroupsId={myGroupsId}/>
                 </div>
             </Router>
         </>
