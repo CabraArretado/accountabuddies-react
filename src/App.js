@@ -108,10 +108,13 @@ function App() {
     /* Profile */
     const [ profile, setProfile ] = useState({"id": "", "first_name":"", "last_name":"", "email":""})
     const getProfile = async () => {
+        if (auth.isAuthenticated())
+        {
         const i = await  API.getCustom("account","myself=true")
         console.log(i)
         setProfile(i[0].user)
         return i
+        }
     }
 
     useEffect(()=>{
