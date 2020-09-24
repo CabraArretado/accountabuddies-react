@@ -17,7 +17,6 @@ const NavBar = props => {
         props.history.push('/')
     }
 
-    console.log(props.profile)
 
 
     return <>
