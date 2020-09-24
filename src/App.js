@@ -7,6 +7,8 @@ import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import CssBaseline from '@material-ui/core/CssBaseline';
+
 import API from "./modules/data_module"
 
 
@@ -64,7 +66,7 @@ function App() {
         }
     }
     ////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////
+
     /* Group Authentication */
 
     const [myGroups, setMyGroups] = useState([]) // Array w/ groups the user participate currently
@@ -103,30 +105,36 @@ function App() {
         */
         setMyGroupsId(myGroups.map(group => group.id))
     }, [myGroups])
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////
+
     /* Profile */
     const [ profile, setProfile ] = useState({})
+
     const getProfile = async () => {
-        const i = await  API.getCustom("account","myself=True")
-        setProfile(i.user)
-        return i
+        if (auth.isAuthenticated()){
+            const i = await  API.getCustom("account","myself=True")
+            setProfile(i[0].user)
+            return i
+        } else {
+            setProfile({})
+        }
     }
 
     useEffect(()=>{
         getProfile()
-    }, [])
+    }, [loggedIn])
 
-//"Hello, world!"
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     return (
         <>
+            <CssBaseline />
             <Router>
                 <Route render={props => (
                     <NavBar setIsLoggedIn={setIsLoggedIn} auth={auth} {...props} myGroups={myGroups}/>
                 )} />
                 <div className="container" >
-                    <ApplicationViews profile={profile} setProfile={setProfile} auth={auth} loggedIn={loggedIn} myGroups={myGroups} getMyGroups={getMyGroups} myGroupsId={myGroupsId}/>
+                    <ApplicationViews profile={profile} getProfile={getProfile} auth={auth} loggedIn={loggedIn} myGroups={myGroups} getMyGroups={getMyGroups} myGroupsId={myGroupsId}/>
                 </div>
             </Router>
         </>
