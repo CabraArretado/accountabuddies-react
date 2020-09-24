@@ -8,8 +8,8 @@ const Profile = (props) => {
     const props_reference = props
 
     const profile = props_reference.profile
-    const setProfile = props_reference.setProfile
-
+    const getProfile = props_reference.getProfile
+    
     return <>
         <div className="container">
             <h2>{profile.first_name} {profile.last_name}</h2>

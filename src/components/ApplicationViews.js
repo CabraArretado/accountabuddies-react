@@ -19,6 +19,8 @@ import Profile from "./Profile/Profile"
 const ApplicationViews = props => {
     const props_reference = props
     const myGroups = props.myGroups
+    const profile = props.profile
+    const getProfile = props.getProfile
     const myGroupsId = props.myGroupsId
     const isAuthenticated = props_reference.auth.isAuthenticated
 
@@ -54,7 +56,7 @@ const ApplicationViews = props => {
                 exact path="/my_profile" render={props => {
                     if(isAuthenticated())
                     {
-                        return <Profile myGroups={props_reference.myGroups} {...props_reference} />
+                        return <Profile getProfile={getProfile} myGroups={props_reference.myGroups} {...props_reference} />
                     }
                     else
                     {
