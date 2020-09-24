@@ -5,10 +5,11 @@ import {getMyGroups} from "../../App"
 
 import API from "../../modules/data_module"
 
-const JoinGroupButton = React.memo(props =>{
+const JoinGroupButton = props =>{
     const getMyGroups = props.getMyGroups
     const groupId = props.groupId
     const [isLoading, setIsLoading] = useState(false)
+    console.log(getMyGroups)
 
     const handleJoin = async () => {
         setIsLoading(true)
@@ -16,16 +17,16 @@ const JoinGroupButton = React.memo(props =>{
             group: groupId
         }
 
-        await API.post("group_user", newRelation)
-        await getMyGroups()
+        await API.post("group_user", newRelation).then(
+            getMyGroups()
+        )
+
         setIsLoading(false)
-        getMyGroups()
     }
 
     return <>
         <Button disabled={isLoading} onClick={handleJoin}>Join!</Button>
     </>
 }
-)
 
 export default JoinGroupButton

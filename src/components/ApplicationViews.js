@@ -51,7 +51,7 @@ const ApplicationViews = props => {
                 }}
             />
 
-            {/* Router for: Search Groups */}
+            {/* Router for: My Profile */}
             <Route
                 exact path="/my_profile" render={props => {
                     if(isAuthenticated())

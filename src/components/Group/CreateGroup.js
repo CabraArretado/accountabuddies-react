@@ -9,6 +9,8 @@ const CreateGroup = props => {
     const title = useRef()
     const description = useRef()
     const size = useRef()
+    const getMyGroups = props.getMyGroups
+    console.log(getMyGroups)
 
     const [group, setGroup] = useState({})
     
@@ -38,6 +40,7 @@ const CreateGroup = props => {
             }
 
         create_group(new_group).then(() => {
+            getMyGroups()
             props.history.push({
                 pathname: "/"
             })

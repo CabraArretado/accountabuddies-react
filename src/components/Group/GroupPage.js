@@ -20,11 +20,19 @@ const GroupPage = (props) => {
 
     useEffect(()=>{getGroup()},[])
 
+    const handleLeave = async (id) => {
+        let i = await API.getCustom("group_user", `leave_group=${groupId}`)
+        console.log(i)
+        // getMyGroups()
+    }
+
     //TODO: formate the date
 
     return <>
         <div className="container">
             <h1>{group.title}</h1>
+
+            <button onClick={handleLeave}>Leave</button>
             <h5>Created by: {group.created_by} in {group.created_at}</h5>
             <h4>{group.description}</h4>
             <h3>{group.population}/{group.size}</h3>
