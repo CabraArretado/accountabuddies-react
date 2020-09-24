@@ -106,11 +106,10 @@ function App() {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /* Profile */
-    const [ profile, setProfile ] = useState({"id": "", "first_name":"", "last_name":"", "email":""})
+    const [ profile, setProfile ] = useState({})
     const getProfile = async () => {
-        const i = await  API.getCustom("account","myself=true")
-        console.log(i)
-        setProfile(i[0].user)
+        const i = await  API.getCustom("account","myself=True")
+        setProfile(i.user)
         return i
     }
 
@@ -118,13 +117,13 @@ function App() {
         getProfile()
     }, [])
 
-
+//"Hello, world!"
 
     return (
         <>
             <Router>
                 <Route render={props => (
-                    <NavBar profile={profile} setIsLoggedIn={setIsLoggedIn} auth={auth} {...props} myGroups={myGroups}/>
+                    <NavBar setIsLoggedIn={setIsLoggedIn} auth={auth} {...props} myGroups={myGroups}/>
                 )} />
                 <div className="container" >
                     <ApplicationViews profile={profile} setProfile={setProfile} auth={auth} loggedIn={loggedIn} myGroups={myGroups} getMyGroups={getMyGroups} myGroupsId={myGroupsId}/>
