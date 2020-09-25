@@ -34,7 +34,7 @@ const NewPostForm = props => {
                     <label htmlFor="inputTitle"> Title </label>
                     <input ref={title} type="text"
                         className="form-control"
-                        placeholder="Email"
+                        placeholder="Title"
                         required autoFocus />
                 </fieldset>
                 <fieldset>

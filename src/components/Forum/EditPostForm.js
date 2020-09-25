@@ -5,49 +5,51 @@ import { Button, Form, Input, FormGroup } from 'react-bootstrap';
 import API from "../../modules/data_module"
 
 // Login Working
-const NewCommentaryForm = props => {
+const EditForm = props => {
     let groupId = props.groupId
     let postId = props.postId
-    let getCommentaries = props.getCommentaries
+    let post = props.post
 
     const title = useRef()
     const content = useRef()
 
-    const handleCommentary = async (e) => {
+    const handleEdit = async (e) => {
         e.preventDefault()
-        console.log(title.current.value)
-        const newCommentary = {
-            "title": title.current.value,
-            "content": content.current.value,
-            "group": groupId,
-            "post": postId
+
+        const edited = {
+            ...post
         }
-        let posted = await API.post("forum_commentary", newCommentary)
-        getCommentaries()
+        edited.title = title.current.value
+        edited.content = content.current.value
+
+        let posted = await API.put("forum_post", post.id, edited)
+
+        await props.getPost()
         props.trigger()
     }
 
     return (
         <>
-            <Form className="form--login" onSubmit={handleCommentary}>
+            <Form className="form--login" onSubmit={handleEdit}>
                 <fieldset>
-                    <label htmlFor="inputTitle"> Title </label>
                     <input ref={title} type="text"
                         className="form-control"
                         placeholder="Title"
+                        defaultValue={post.title}
                         required autoFocus />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="inputContent"> Content </label>
                     <input ref={content} type="text"
-                        id="password"
+                        id="content"
                         className="form-control"
                         placeholder="Content"
+                        defaultValue={post.content}
                         required />
                 </fieldset>
                 <fieldset>
                     <Button type="submit">
-                        Post
+                        Confirm Edition
                     </Button>
                 </fieldset>
             </Form>
@@ -55,4 +57,4 @@ const NewCommentaryForm = props => {
     )
 }
 
-export default NewCommentaryForm
+export default EditForm

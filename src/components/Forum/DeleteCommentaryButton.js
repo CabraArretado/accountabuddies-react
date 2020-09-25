@@ -19,7 +19,8 @@ const DeleteCommentaryButton = React.memo(props =>{
     console.log(groupId)
 
 
-    const handleDelete = async () => {
+    const handleDelete = async (e) => {
+        e.preventDefault()
         await API.delete("forum_commentary", commentaryId)
         history.push(`/forum/${groupId}/${postId}`)
         try { await getCommentaries() 

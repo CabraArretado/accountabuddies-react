@@ -4,6 +4,8 @@ import { Button, Form, Input, FormGroup } from 'react-bootstrap';
 
 import DeleteCommentaryButton from "./DeleteCommentaryButton"
 import API from "../../modules/data_module"
+import EditCommentaryForm from "./EditCommentaryForm"
+import EditCommentaryButton from "./EditCommentaryButton"
 
 // moods
 
@@ -13,18 +15,26 @@ const CommentaryBox = (props) => {
     let profile = props.profile
     let getCommentaries = props.getCommentaries
     const commentary = props.commentary
-    //TODO: formate the date
 
-    console.log(id)
+    const [ editing, setEditing ] = useState(false)
 
+    const triggerForm = () => {
+        setEditing(!editing)
+    }
 
     return <>
+    { 
+        editing
+        ?  
+        <EditCommentaryForm getCommentaries={getCommentaries} triggerForm={triggerForm} groupId={groupId} postId={id} commentary={commentary} />
+        : 
         <div className="">
             <h1>{commentary.title}</h1>
             <h5>{commentary.user.first_name} at {commentary.created_at} </h5>
             <h4>{commentary.content}</h4>
-            { commentary.user.id == profile.id ? <DeleteCommentaryButton groupId={groupId} commentaryId={commentary.id} getCommentaries={getCommentaries} table={"forum_post"} postId={id} /> : null }
+            { commentary.user.id == profile.id ? <> <EditCommentaryButton triggerForm={triggerForm} /> <DeleteCommentaryButton groupId={groupId} commentaryId={commentary.id} getCommentaries={getCommentaries} table={"forum_post"} postId={id} /> </>: null }
         </div>
+    }
     </>
 };
 
