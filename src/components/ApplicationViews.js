@@ -128,7 +128,7 @@ const ApplicationViews = props => {
                     console.log(groupId)
                     
                     if(myGroupsId.includes(groupId)){
-                    return <ForumMain  {...props_reference} groupId={parseInt(props.match.params.groupId)}/>
+                    return <ForumMain profile={profile}  {...props_reference} groupId={parseInt(props.match.params.groupId)}/>
                     }
                     else{ return <Redirect to="/" /> }
                 }}
