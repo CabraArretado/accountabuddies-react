@@ -17,7 +17,8 @@ const DeleteButton = React.memo(props =>{
     console.log(groupId)
 
 
-    const handleDelete = async () => {
+    const handleDelete = async (e) => {
+        e.preventDefault()
         await API.delete(table, id)
         history.push(`/forum/${groupId}`)
         try { await getPost() 
