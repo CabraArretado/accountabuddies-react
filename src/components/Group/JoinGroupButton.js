@@ -9,7 +9,6 @@ const JoinGroupButton = props =>{
     const getMyGroups = props.getMyGroups
     const groupId = props.groupId
     const [isLoading, setIsLoading] = useState(false)
-    console.log(getMyGroups)
 
     const handleJoin = async () => {
         setIsLoading(true)

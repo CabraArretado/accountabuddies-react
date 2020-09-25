@@ -21,6 +21,7 @@ const NavBar = props => {
 const handleMenuItemClick = (event, index) => {
     event.preventDefault()
     history.push(`/groups/${index}`)
+
 };
     
 
@@ -37,27 +38,15 @@ const handleMenuItemClick = (event, index) => {
                     <li className="nav-item active">
                         <Link className="nav-link" to={"/"}>Home <span className="sr-only">(current)</span></Link>
                     </li>
+                    
                     { isAuthenticated() ?
                     <>
                     <li className="nav-item">
                         <Link className="nav-link" to="/groups">Find Groups</Link>
                     </li>
+
                     <li className="nav-item">
-                        <Link className="nav-link" to="/my_profile">/my_profile</Link>
-                    </li>
-                    <li className="nav-item dropdown">
-                        <Link className="nav-link dropdown-toggle" to={"/my_groups"} id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            My Groups
-                    </Link>
-                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                            {
-                                myGroups.map(group => {
-                                    return <Button onClick={(e)=>handleMenuItemClick(e, group.id)} key={group.id} className="dropdown-item" to={`/groups/${group.id}`}> {group.title} </Button>
-                                })
-                            }
-                            <div className="dropdown-divider"></div>
-                            <a className="dropdown-item" href="/create_group">Create New Group</a>
-                        </div>
+                        <Link className="nav-link" to="/my_groups">My Groups</Link>
                     </li>
                     </>
                     : null }
@@ -65,7 +54,7 @@ const handleMenuItemClick = (event, index) => {
                 <form className="form-inline my-2 my-lg-0">
                     {
                         isAuthenticated() ? <>
-                            {/* <a className="nav-link" href="/my_profile"> {profile.first_name}</a> */}
+                            <Link className="nav-item" to="/my_profile">My account</Link>
                             <button className="btn btn-outline-warning my-2 my-sm-0 mx-2" type="submit" onClick={handleLogout}>Logout</button>
                             </>
                             :

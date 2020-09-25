@@ -22,10 +22,6 @@ const GroupPage = (props) => {
     useEffect(()=>{getGroup()
     },[groupId])
 
-    useEffect(()=>{
-        setThisGroup(group.id)
-    }, [group])
-
     const handleLeave = async (id) => {
         // getMyGroups()
     }
