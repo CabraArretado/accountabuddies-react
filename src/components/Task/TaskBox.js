@@ -9,15 +9,19 @@ import API from "../../modules/data_module"
 const TaskBox = (props) => {
 
     let task = props.task
+    const requestQuery = props.requestQuery
 
-    const handleDone = () => {
+    const handleDone = async (e) => {
+        e.preventDefault()
         let myTask = {
             ...task
         }
         myTask.done = true
-        API.put("task", task.id, myTask)
-        props.requestQuery()
+        await API.put("task", task.id, myTask)
+        await requestQuery()
     }
+
+    console.log(requestQuery)
 
 
 

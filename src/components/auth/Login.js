@@ -22,12 +22,6 @@ const Login = props => {
     const email = useRef()
     const password = useRef()
 
-    // Handle the come back to the last page before login
-    let history = useHistory();
-    let back = () => {
-        history.goBack();
-    }
-
     // Simplistic handler for login submit
     const handleLogin = (e) => {
         e.preventDefault()
@@ -50,7 +44,8 @@ const Login = props => {
                 {'Copyright © '}
                 <Link color="inherit" href="http://localhost:3000/">
                     Account-a-buddies
-      </Link>{' '}
+                </Link>{' '}
+
                 {new Date().getFullYear()}
                 {'.'}
             </Typography>

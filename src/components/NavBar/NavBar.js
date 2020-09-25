@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Route, Redirect } from 'react-router-dom';
+import { Link, Route, Redirect, useHistory } from 'react-router-dom';
 import { Button, Form, Input, FormGroup } from 'react-bootstrap';
 
 import SimpleMenu from "./LittleMenu"
@@ -16,12 +16,19 @@ const NavBar = props => {
         setIsLoggedIn(false)
         props.history.push('/')
     }
+    const history = useHistory();
+    
+const handleMenuItemClick = (event, index) => {
+    event.preventDefault()
+    history.push(`/groups/${index}`)
 
+};
+    
 
 
     return <>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a className="navbar-brand" href="/">account-a-buddies</a>
+            <Link className="navbar-brand" to="/">account-a-buddies</Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
@@ -29,34 +36,17 @@ const NavBar = props => {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item active">
-                        <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
+                        <Link className="nav-link" to={"/"}>Home <span className="sr-only">(current)</span></Link>
                     </li>
+                    
                     { isAuthenticated() ?
                     <>
                     <li className="nav-item">
                         <Link className="nav-link" to="/groups">Find Groups</Link>
                     </li>
+
                     <li className="nav-item">
-                        <Link className="nav-link" to="/my_profile">/my_profile</Link>
-                    </li>
-                    <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            My Groups
-                        </a>
-                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                            {
-                                myGroups.map(group => {
-                                    return <a key={group.id} className="dropdown-item" href={`/groups/${group.id}`}> {group.title} </a>
-                                })
-                            }
-                            {/* <a className="dropdown-item" href="#">Action</a>
-                            <a className="dropdown-item" href="#">Another action</a> */}
-                            <div className="dropdown-divider"></div>
-                            <a className="dropdown-item" href="/create_group">Create New Group</a>
-                        </div>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link disabled" href="#">Disabled</a>
+                        <Link className="nav-link" to="/my_groups">My Groups</Link>
                     </li>
                     </>
                     : null }
@@ -64,7 +54,7 @@ const NavBar = props => {
                 <form className="form-inline my-2 my-lg-0">
                     {
                         isAuthenticated() ? <>
-                            {/* <a className="nav-link" href="/my_profile"> {profile.first_name}</a> */}
+                            <Link className="nav-item" to="/my_profile">My account</Link>
                             <button className="btn btn-outline-warning my-2 my-sm-0 mx-2" type="submit" onClick={handleLogout}>Logout</button>
                             </>
                             :

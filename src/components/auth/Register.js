@@ -22,7 +22,6 @@ const Register = props => {
     const firstName = useRef()
     const lastName = useRef()
     const password = useRef()
-    const verifyPassword = useRef()
 
 
     const register = props.auth.register

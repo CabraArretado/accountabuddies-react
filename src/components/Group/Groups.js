@@ -11,6 +11,7 @@ import GroupBox from "./GroupBox"
 const Groups = (props) => {
     let props_reference = props
     const myGroups = props.myGroups
+    const getMyGroups = props.getMyGroups
 
     // Variables
     const [isLoading, setIsLoading] = useState(false); // Button is loading
@@ -35,7 +36,7 @@ const Groups = (props) => {
     //Effect
     useEffect(()=>{
         requestQuery(keyWords)
-    },[keyWords])
+    },[keyWords, myGroups])
 
 
     return <>
@@ -43,7 +44,7 @@ const Groups = (props) => {
             <h5 className="">Groups</h5>
             <SearchGroup {...props_reference} groups={groups} requestQuery={requestQuery} setKeyWords={setKeyWords}/>
 
-            { groups.map(group => <GroupBox key={group.id} getMyGroups={props_reference.getMyGroups} group={group} is_my_gorup={false}/>) }
+            { groups.map(group => <GroupBox key={group.id} getMyGroups={props_reference.getMyGroups} group={group}  is_my_gorup={false}/>) }
 
         </section>
         <Link to="/create_group">Create Group</Link>

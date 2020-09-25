@@ -8,7 +8,7 @@ import API from "../../modules/data_module"
 
 const ForumPreviewBox = (props) => {
     let post = props.post
-    console.log(post)
+    console.log(props.groupId)
     let groupId = props.groupId
 
     return <>

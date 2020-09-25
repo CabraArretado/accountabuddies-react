@@ -47,6 +47,7 @@ const ForumMain = (props) => {
         requestQuery(keyWords)
     },[keyWords])
 
+    console.log(groupId)
 
     return <>
         <section className="container">
@@ -54,7 +55,7 @@ const ForumMain = (props) => {
             <NewPostButton groupId={groupId} />
             <SearchForum {...props_reference} requestQuery={requestQuery} setKeyWords={setKeyWords}/>
 
-            { posts.map(post => <ForumPreviewBox key={post.id} post={post} groupId={groupId} />) }
+            { posts.map(post => <ForumPreviewBox groupId={groupId} key={post.id} post={post} groupId={groupId} />) }
         </section>
     </>
 };
