@@ -13,17 +13,17 @@ const NewPostForm = props => {
 
     const handlePost = async (e) => {
         e.preventDefault()
-        console.log(title.current.value)
         const newPost = {
             "title": title.current.value,
             "content": content.current.value,
             "group": groupId
         }
         let posted = await API.post("forum_post", newPost)
-        props.history.push({
-            // Need to push to the post link
-            pathname: `/forum/${groupId}/${posted.id}`
-        })
+        props.history.push("/")
+            // // Need to push to the post link
+            // // pathname: `/forum/${groupId}/${posted.id}`
+            // pathname: "/"
+        // })
     }
 
     return (

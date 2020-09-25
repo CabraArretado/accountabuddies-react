@@ -12,19 +12,24 @@ const GroupPage = (props) => {
     const getMyGroups = props.getMyGroups
     let groupId = props.groupId
     const [ group, setGroup ] = useState({})
+    const [ thisGroup, setThisGroup] = useState(props.groupId)
 
     const getGroup = async () => {
         const groupQuery = await API.get("group", groupId)
         setGroup(groupQuery)
     }
 
-    useEffect(()=>{getGroup()},[])
+    useEffect(()=>{getGroup()
+    },[groupId])
+
+    useEffect(()=>{
+        setThisGroup(group.id)
+    }, [group])
 
     const handleLeave = async (id) => {
-        let i = await API.getCustom("group_user", `leave_group=${groupId}`)
-        console.log(i)
         // getMyGroups()
     }
+
 
     //TODO: formate the date
 
@@ -37,9 +42,9 @@ const GroupPage = (props) => {
             <h4>{group.description}</h4>
             <h3>{group.population}/{group.size}</h3>
         </div>
-        <ForumMain groupId={groupId} />
+        <ForumMain groupId={thisGroup} />
         <Link to={`/forum/${groupId}`}> Forum </Link>
-        <TaskMain groupId={groupId} />
+        <TaskMain groupId={thisGroup} />
     </>
 };
 

@@ -125,6 +125,7 @@ const ApplicationViews = props => {
             <Route
                 exact path="/forum/:groupId(\d+)" render={props => {
                     let groupId = parseInt(props.match.params.groupId)
+                    console.log(groupId)
                     
                     if(myGroupsId.includes(groupId)){
                     return <ForumMain  {...props_reference} groupId={parseInt(props.match.params.groupId)}/>
@@ -146,14 +147,14 @@ const ApplicationViews = props => {
 
             {/* Router for: Forum New Post */}
             <Route
-                exact path="/forum/group=:groupId(\d+)/new_post" render={props => {
+                exact path="/forum/:groupId(\d+)/new_post" render={props => {
                     let groupId = parseInt(props.match.params.groupId)
-
-                    if(myGroupsId.includes(groupId)){
+                    console.log(myGroupsId)
+                    // if(myGroupsId.includes(groupId)){
                         return <NewPostForm  {...props_reference} groupId={parseInt(props.match.params.groupId)}/>
-                    } else {
-                        return <Redirect to="/" />
-                    }
+                    // } else {
+                    //     return <Redirect to="/" />
+                    // }
                 }}
             />
 
