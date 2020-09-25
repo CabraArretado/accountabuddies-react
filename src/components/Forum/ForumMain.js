@@ -47,8 +47,6 @@ const ForumMain = (props) => {
         requestQuery(keyWords)
     },[keyWords])
 
-    console.log(groupId)
-
     return <>
         <section className="container">
             <h5 className="">Forum </h5>

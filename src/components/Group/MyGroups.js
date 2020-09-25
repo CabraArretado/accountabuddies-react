@@ -16,7 +16,7 @@ const MyGroups = (props) => {
     return <>
         <section className="container">
             <h5 className="">Groups</h5>
-                { myGroups.map(group => <GroupBox is_my_group={true} key={group.id} group={group}/>) }
+                { myGroups.map(group => <GroupBox my_link={true} is_my_group={true} key={group.id} group={group}/>) }
         </section>
         <Link to="/create_group">Create Group</Link>
     </>

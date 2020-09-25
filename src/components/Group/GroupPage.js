@@ -13,14 +13,25 @@ const GroupPage = (props) => {
     let groupId = props.groupId
     const [ group, setGroup ] = useState({})
     const [ thisGroup, setThisGroup] = useState(props.groupId)
+    const [ created_by, setCreated_by] = useState({"first_name":""})
 
+    const getUser = async () => {
+        const userQuery = await API.get("account", group.created_by)
+        setCreated_by(userQuery.user)
+    }
     const getGroup = async () => {
         const groupQuery = await API.get("group", groupId)
         setGroup(groupQuery)
     }
 
-    useEffect(()=>{getGroup()
+    useEffect(()=>{
+        getGroup()
+
     },[groupId])
+
+    useEffect(()=>{
+        getUser()
+    },[group])
 
     const handleLeave = async (id) => {
         // getMyGroups()
@@ -33,10 +44,10 @@ const GroupPage = (props) => {
         <div className="container">
             <h1>{group.title}</h1>
 
-            <button onClick={handleLeave}>Leave</button>
-            <h5>Created by: {group.created_by} in {group.created_at}</h5>
+            {/* <button onClick={handleLeave}>Leave</button> */}
+            <h5>Created by: {created_by.first_name} in {group.created_at}</h5>
             <h4>{group.description}</h4>
-            <h3>{group.population}/{group.size}</h3>
+            {/* <h3>{group.population}/{group.size}</h3> */}
         </div>
         <ForumMain groupId={thisGroup} />
         <Link to={`/forum/${groupId}`}> Forum </Link>

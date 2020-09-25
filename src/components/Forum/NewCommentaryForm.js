@@ -15,7 +15,6 @@ const NewCommentaryForm = props => {
 
     const handleCommentary = async (e) => {
         e.preventDefault()
-        console.log(title.current.value)
         const newCommentary = {
             "title": title.current.value,
             "content": content.current.value,
