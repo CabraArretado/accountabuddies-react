@@ -2,15 +2,20 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, Redirect } from "react-router-dom";
 import { Button, Form, Input, FormGroup } from 'react-bootstrap';
 
+import DeleteCommentaryButton from "./DeleteCommentaryButton"
 import API from "../../modules/data_module"
 
 // moods
 
 const CommentaryBox = (props) => {
-
-    let post = props.post
+    let groupId = props.groupId
+    let id = props.id
+    let profile = props.profile
+    let getCommentaries = props.getCommentaries
     const commentary = props.commentary
     //TODO: formate the date
+
+    console.log(id)
 
 
     return <>
@@ -18,6 +23,7 @@ const CommentaryBox = (props) => {
             <h1>{commentary.title}</h1>
             <h5>{commentary.user.first_name} at {commentary.created_at} </h5>
             <h4>{commentary.content}</h4>
+            { commentary.user.id == profile.id ? <DeleteCommentaryButton groupId={groupId} commentaryId={commentary.id} getCommentaries={getCommentaries} table={"forum_post"} postId={id} /> : null }
         </div>
     </>
 };

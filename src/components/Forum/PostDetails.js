@@ -32,6 +32,7 @@ const PostDetails = (props) => {
         getCommentaries()
     },[])
 
+    console.log(postId)
 
     //TODO: formate the date
 
@@ -43,7 +44,7 @@ const PostDetails = (props) => {
             { post.created_by.id == profile.id ? <DeleteButton groupId={groupId} getPost={getPost} table={"forum_post"} id={post.id} /> : null }
         </div>
         <div>
-            { commentaries.map(commentary => <CommentaryBox commentary={commentary} key={commentary.id} />) }
+            { commentaries.map(commentary => <CommentaryBox id={post.id} groupId={groupId} commentary={commentary} key={commentary.id} profile={profile} getCommentaries={getCommentaries}/>) }
         </div>
         <NewCommentaryButton postId={postId} groupId={groupId} getCommentaries={getCommentaries} />
     </>
