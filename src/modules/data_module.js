@@ -15,17 +15,16 @@ export default {
         return fetch(`${remoteURL}/${list}`).then(result => result.json())
     },
 
-    //DELETE
-    delete(list, id) {
-        return fetch(`${remoteURL}/${list}/${id}`, {
+    // DELETE
+    async delete(list, id) {
+        let i = await fetch(`${remoteURL}/${list}/${id}`, {
             method: "DELETE",
             "headers": {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
                 "Authorization": `Token ${localStorage.getItem("accountaboddies_token")}`
             }
-        }).then(data => data.json())
-
+        })
     },
 
     // POST
@@ -89,7 +88,7 @@ export default {
         return data
     },
 
-    async getUserId(request){
+    async getUserId(request) {
         console.log("request")
     }
 }
