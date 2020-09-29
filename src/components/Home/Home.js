@@ -43,4 +43,4 @@ const Home = props => {
         </main>
     )
 }
- export default Home
+export default Home

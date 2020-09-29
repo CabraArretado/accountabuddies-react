@@ -1,72 +1,117 @@
-import React, { useState } from 'react';
+import React from 'react';
+import {  makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import MenuIcon from '@material-ui/icons/Menu';
+
 import { Link, Route, Redirect, useHistory } from 'react-router-dom';
-import { Button, Form, Input, FormGroup } from 'react-bootstrap';
 
-import SimpleMenu from "./LittleMenu"
+const useStyles = makeStyles((theme) => ({
+    grow: {
+        flexGrow: 1,
+    },
+    menuButton: {
+        marginRight: theme.spacing(2),
+    },
+    title: {
+        display: 'none',
+        [theme.breakpoints.up('sm')]: {
+            display: 'block',
+        },
+    },
+    inputRoot: {
+        color: 'inherit',
+    },
+    inputInput: {
+        padding: theme.spacing(1, 1, 1, 0),
+        // vertical padding + font size from searchIcon
+        paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+        transition: theme.transitions.create('width'),
+        width: '100%',
+        [theme.breakpoints.up('md')]: {
+            width: '20ch',
+        },
+    },
+    sectionDesktop: {
+        display: 'none',
+        [theme.breakpoints.up('md')]: {
+            display: 'flex',
+        },
+    },
+}));
 
-const NavBar = props => {
+export default function NavBar(props) {
+
+    const history = useHistory();
     const setIsLoggedIn = props.setIsLoggedIn
     const isAuthenticated = props.auth.isAuthenticated
     const logout = props.auth.logout
     const myGroups = props.myGroups
     const profile = props.profile
 
+    const classes = useStyles();
+
+
+
+    /* LINKS TO ANOTHER PAGES */
+    const handleMyProfile = () => {
+        history.push(`/my_profile`)
+    }
+
     const handleLogout = () => {
         logout()
-        setIsLoggedIn(false)
-        props.history.push('/')
+        history.push(`/`)
     }
-    const history = useHistory();
-    
-const handleMenuItemClick = (event, index) => {
-    event.preventDefault()
-    history.push(`/groups/${index}`)
 
-};
-    
+    const handleLogin = () => {
+        history.push(`/login`)
+    }
+
+    const handleRegister = () => {
+        history.push(`/register`)
+    }
 
 
-    return <>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <Link className="navbar-brand" to="/">account-a-buddies</Link>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-            </button>
 
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="navbar-nav mr-auto">
-                    <li className="nav-item active">
-                        <Link className="nav-link" to={"/"}>Home <span className="sr-only">(current)</span></Link>
-                    </li>
+    /* --- */
+
+    return (
+        <div className={classes.grow}>
+            <AppBar position="static">
+                <Toolbar>
+                { isAuthenticated() ? <>
+                    <IconButton
+                        edge="start"
+                        className={classes.menuButton}
+                        color="inherit"
+                        aria-label="open drawer"
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    </> :
+                    null }
+
+                    <Typography className={classes.title} variant="h6" noWrap>
+                        Account-a-buddies
+                    </Typography>
+                    <div className={classes.grow} />
                     
-                    { isAuthenticated() ?
-                    <>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/groups">Find Groups</Link>
-                    </li>
-
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/my_groups">My Groups</Link>
-                    </li>
+                    { isAuthenticated() ? <>
+                        <MenuItem onClick={handleMyProfile}>My Profile</MenuItem>
+                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
                     </>
-                    : null }
-                </ul>
-                <form className="form-inline my-2 my-lg-0">
-                    {
-                        isAuthenticated() ? <>
-                            <Link className="nav-item" to="/my_profile">My account</Link>
-                            <button className="btn btn-outline-warning my-2 my-sm-0 mx-2" type="submit" onClick={handleLogout}>Logout</button>
-                            </>
-                            :
-                            <>
-                                <Link to="/login"><button className="btn btn-outline-success my-2 my-sm-0 mx-2" type="submit">Login</button></Link>
-                                <Link to="/register"><button className="btn btn-outline-success my-2 my-sm-0 mx-2" type="submit">Register</button></Link>
-                            </>
+                    : <>
+                    <MenuItem onClick={handleLogin}>Sign in</MenuItem>
+                    <MenuItem onClick={handleRegister}>Register</MenuItem>
+                    
+                    </>
                     }
-                </form>
-            </div>
-        </nav>
-    </>
+                </Toolbar>
+            </AppBar>
+        </div>
+    );
 }
-
-export default NavBar
