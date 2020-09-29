@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Route } from 'react-router-dom';
+
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+
 import ApplicationViews from './components/ApplicationViews';
 import NavBar from "./components/NavBar/NavBar"
 import './App.css';
@@ -77,29 +82,29 @@ function App() {
         /*
         If user is authenticated call the server to see which is the user in and set the myGroups with a answer, else change myGroup to empty array
         */
-        if (auth.isAuthenticated()){
-        let api_call = await fetch(`http://127.0.0.1:8000/group?my_groups=true`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                "Authorization": `Token ${localStorage.getItem("accountaboddies_token")}`
-            }
-        }).then(res => res.json())
-        setMyGroups(api_call)
+        if (auth.isAuthenticated()) {
+            let api_call = await fetch(`http://127.0.0.1:8000/group?my_groups=true`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "Authorization": `Token ${localStorage.getItem("accountaboddies_token")}`
+                }
+            }).then(res => res.json())
+            setMyGroups(api_call)
         } else {
             setMyGroups([])
         }
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         /*
         Update MyGroup if the user login or logout
         */
         getMyGroups()
     }, [loggedIn])
 
-    useEffect(()=>{
+    useEffect(() => {
         /*
         Just changes the MyGroupsId to the current group set
         */
@@ -108,11 +113,11 @@ function App() {
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /* Profile */
-    const [ profile, setProfile ] = useState({})
+    const [profile, setProfile] = useState({})
 
     const getProfile = async () => {
-        if (auth.isAuthenticated()){
-            const i = await  API.getCustom("account","myself=True")
+        if (auth.isAuthenticated()) {
+            const i = await API.getCustom("account", "myself=True")
             setProfile(i[0].user)
             return i
         } else {
@@ -120,7 +125,7 @@ function App() {
         }
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         getProfile()
     }, [loggedIn])
 
@@ -130,12 +135,33 @@ function App() {
         <>
             <CssBaseline />
             <Router>
-                <Route render={props => (
-                    <NavBar setIsLoggedIn={setIsLoggedIn} auth={auth} {...props} myGroups={myGroups}/>
-                )} />
-                <div className="container" >
-                    <ApplicationViews profile={profile} getProfile={getProfile} auth={auth} loggedIn={loggedIn} myGroups={myGroups} getMyGroups={getMyGroups} myGroupsId={myGroupsId}/>
-                </div>
+            <Grid container spacing={0}
+            
+            >
+                        <Route render={props => (
+                            <NavBar
+                                setIsLoggedIn={setIsLoggedIn}
+                                auth={auth} {...props}
+                                myGroups={myGroups} />
+                        )} />
+                </Grid>
+                <Grid container
+                    direction="row"
+                    justify="space-evenly"
+                    alignItems="flex-start"
+                    spacing={1}
+                    xs={12}
+                    >
+
+                    <ApplicationViews
+                        profile={profile} 
+                        getProfile={getProfile} 
+                        auth={auth} 
+                        loggedIn={loggedIn} 
+                        myGroups={myGroups} 
+                        getMyGroups={getMyGroups} 
+                        myGroupsId={myGroupsId} />
+                </Grid>
             </Router>
         </>
     );
