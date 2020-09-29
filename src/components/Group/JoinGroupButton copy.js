@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { withRouter, Link } from "react-router-dom"
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import { Link, Redirect } from "react-router-dom";
+import { Button, Form, Input, FormGroup } from 'react-bootstrap';
+import {getMyGroups} from "../../App"
 
 import API from "../../modules/data_module"
 
-const JoinGroupButton = props => {
-    const { getMyGroups, groupId, history} = props
+const JoinGroupButton = props =>{
+    const getMyGroups = props.getMyGroups
+    const groupId = props.groupId
     const [isLoading, setIsLoading] = useState(false)
 
     const handleJoin = async () => {
@@ -17,14 +18,14 @@ const JoinGroupButton = props => {
 
         await API.post("group_user", newRelation).then(
             getMyGroups()
-        ).then( history.push(`groups/${groupId}`))
+        )
 
         setIsLoading(false)
     }
 
     return <>
-        <Button variant="contained" disabled={isLoading} onClick={handleJoin}>Join!</Button>
+        <Button disabled={isLoading} onClick={handleJoin}>Join!</Button>
     </>
 }
 
-export default withRouter(JoinGroupButton)
+export default JoinGroupButton

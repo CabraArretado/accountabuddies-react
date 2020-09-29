@@ -1,34 +1,73 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, Redirect } from "react-router-dom";
-import { Button, Form, Input, FormGroup } from 'react-bootstrap';
+import { Link, Redirect, withRouter } from "react-router-dom";
 
-import API from "../../modules/data_module"
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 import JoinGroupButton from "./JoinGroupButton"
+import LinkMUI from '@material-ui/core/Link';
 
-// moods
+const useStyles = makeStyles({
+  root: {
+    minWidth: 275,
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+});
 
-const GroupBox = (props) => {
-    let group = props.group
-    let my_link = props.my_link
+function GroupBox(props) {
 
-    const getMyGroups = props.getMyGroups
+  const classes = useStyles();
+  const { group, getMyGroups, my_link, history }  = props
 
-    
 
-    return <>
-        <div className="container">
+  const handleAccessGroup = (e) => {
+        // e.preventDefault()
+        history.push(`groups/${group.id}`)
+  }
+
+  const bull = <span className={classes.bullet}>•</span>;
+
+  return (
+    <Card className={classes.root} variant="outlined">
+      <CardContent>
+        <Typography className={classes.title} color="textSecondary" gutterBottom>
+            Group
+        </Typography>
+        <Typography variant="h5" component="h2">
         { my_link ? <>
-            <Link to={`groups/${group.id}`}><h1>{group.title}</h1></Link>
+            <LinkMUI onClick={handleAccessGroup} color="inherit">{group.title}</LinkMUI>
         </>
-        :
-        <h1>{group.title}</h1>
+        : <>
+        { group.title }
+        </>
         }
-            <h4>{group.description}</h4>
-            {/* <h3>{group.population}/{group.size}</h3> */}
-            
-            { props.is_my_group ? null : <JoinGroupButton getMyGroups={getMyGroups} groupId={group.id}/>  }
-        </div>
-    </>
-};
+        </Typography>
+        <Typography className={classes.pos} color="textSecondary">
+          Open
+        </Typography>
+        <Typography variant="body2" component="p">
+        {group.description}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        {/* <Button size="small">Learn More</Button> */}
+        { props.is_my_group ? null : <JoinGroupButton getMyGroups={getMyGroups} groupId={group.id} history={history} {...props}/>  }
+      </CardActions>
+    </Card>
+  );
+}
 
-export default GroupBox;
+export default withRouter(GroupBox)
