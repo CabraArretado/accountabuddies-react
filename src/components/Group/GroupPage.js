@@ -60,8 +60,8 @@ const GroupPage = (props) => {
                 <h4>{group.description}</h4>
                 {/* <h3>{group.population}/{group.size}</h3> */}
             </Grid>
-            <Grid item xs={2}>{/* Grid to center */}
-        </Grid>
+            <Grid item xs={2} />{/* Grid to center */}
+
         </Grid>
         <Grid item container
             direction="row"

@@ -13,12 +13,31 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 import API from "./modules/data_module"
 
 
 
 function App() {
+
+
+
+const theme = createMuiTheme({
+  palette: {
+    type: "dark",
+    // primary: {
+    //   // Purple and green play nicely together.
+    //   main: blue,
+    // },
+    // secondary: {
+    //   // This is green.A700 as hex.
+    //   main: blue,
+    // },
+
+  },
+});
+
 
     // AUTHENTICATION FEATURES
     // ALL AUTHENTICATION FEATURES (BUT STATES) MUST BE PASSED HERE INSIDE THE auth obj
@@ -133,37 +152,42 @@ function App() {
 
     return (
         <>
-            <CssBaseline />
-            <Router>
-            <Grid container spacing={0}
-            
-            >
-                        <Route render={props => (
-                            <NavBar
-                                setIsLoggedIn={setIsLoggedIn}
-                                auth={auth} {...props}
-                                myGroups={myGroups} />
-                        )} />
-                </Grid>
-                <Grid container
-                    direction="row"
-                    justify="space-evenly"
-                    alignItems="flex-start"
-                    spacing={1}
-                    xs={12}
-                    >
+            <ThemeProvider theme={theme}>
+                <Paper>
+                    <CssBaseline />
+                    <Router>
+                        <Grid container spacing={0}
 
-                    <ApplicationViews
-                        profile={profile} 
-                        getProfile={getProfile} 
-                        auth={auth} 
-                        loggedIn={loggedIn} 
-                        myGroups={myGroups} 
-                        getMyGroups={getMyGroups} 
-                        myGroupsId={myGroupsId} />
-                </Grid>
-            </Router>
+                        >
+                            <Route render={props => (
+                                <NavBar
+                                    setIsLoggedIn={setIsLoggedIn}
+                                    auth={auth} {...props}
+                                    myGroups={myGroups} />
+                            )} />
+                        </Grid>
+                        <Grid container
+                            direction="row"
+                            justify="space-evenly"
+                            alignItems="flex-start"
+                            spacing={1}
+                            xs={12}
+                        >
+
+                            <ApplicationViews
+                                profile={profile}
+                                getProfile={getProfile}
+                                auth={auth}
+                                loggedIn={loggedIn}
+                                myGroups={myGroups}
+                                getMyGroups={getMyGroups}
+                                myGroupsId={myGroupsId} />
+                        </Grid>
+                    </Router>
+                </Paper>
+            </ThemeProvider>
         </>
+
     );
 }
 
