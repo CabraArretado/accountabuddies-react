@@ -1,6 +1,6 @@
-# Accountaboddies
+# Account-a-buddies
 
-## Due date 23th September. Updates comming.
+## Updates comming.
 
 Front-end  React.js project supposed to work with [Accountaboddies API](https://github.com/felipetempus/accountabuddies-API) as Back-End.
 
