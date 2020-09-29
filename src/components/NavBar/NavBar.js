@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import {  makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -9,6 +9,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 
 import { Link, Route, Redirect, useHistory } from 'react-router-dom';
+import SimpleDrawer from "./Drawer"
 
 const useStyles = makeStyles((theme) => ({
     grow: {
@@ -55,6 +56,11 @@ export default function NavBar(props) {
 
     const classes = useStyles();
 
+    const [drawerOpen, setDrawerOpen] = useState(false)
+    const switchDrawer = () => {
+        setDrawerOpen(!drawerOpen)
+    }
+
 
 
     /* LINKS TO ANOTHER PAGES */
@@ -80,6 +86,7 @@ export default function NavBar(props) {
     /* --- */
 
     return (
+        <>
         <div className={classes.grow}>
             <AppBar position="static">
                 <Toolbar>
@@ -89,6 +96,7 @@ export default function NavBar(props) {
                         className={classes.menuButton}
                         color="inherit"
                         aria-label="open drawer"
+                        onClick={switchDrawer}
                     >
                         <MenuIcon />
                     </IconButton>
@@ -113,5 +121,10 @@ export default function NavBar(props) {
                 </Toolbar>
             </AppBar>
         </div>
+        { isAuthenticated() ?
+        <SimpleDrawer drawerOpen={drawerOpen} switchDrawer={switchDrawer}/>
+        :
+        null }
+        </>
     );
 }

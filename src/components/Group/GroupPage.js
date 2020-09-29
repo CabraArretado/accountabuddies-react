@@ -16,8 +16,10 @@ const GroupPage = (props) => {
     const [ created_by, setCreated_by] = useState({"first_name":""})
 
     const getUser = async () => {
+        if (group.created_by !== undefined) {
         const userQuery = await API.get("account", group.created_by)
         setCreated_by(userQuery.user)
+        }
     }
     const getGroup = async () => {
         const groupQuery = await API.get("group", groupId)
