@@ -56,9 +56,9 @@ const PostDetails = (props) => {
                         editing ?
                             <EditPostForm trigger={trigger} groupId={groupId} getPost={getPost} table={"forum_post"} id={post.id} post={post} />
                             : <>
-                                <h1>{post.title}</h1>
-                                <h5>Posted by: {post.created_by.first_name} in {post.created_at}</h5>
-                                <h4>{post.content}</h4>
+                                <Typography variant="h3">{post.title}</Typography>
+                                <Typography variant="subtitle2">Posted by {post.created_by.first_name} in {post.created_at}</Typography>
+                                <Typography variant="h6">{post.content}</Typography>
                                 {post.created_by.id == profile.id ? <> <DeleteButton groupId={groupId} getPost={getPost} table={"forum_post"} id={post.id} />  <EditPostButton trigger={trigger} /> </> : null}
                             </>
                     }
