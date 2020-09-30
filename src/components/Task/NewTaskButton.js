@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, Redirect } from "react-router-dom";
-import { Button, Form, Input, FormGroup } from 'react-bootstrap';
+import { Form, Input, FormGroup } from 'react-bootstrap';
+import Button from '@material-ui/core/Button';
 import {getMyGroups} from "../../App"
 
 import API from "../../modules/data_module"
@@ -19,7 +20,7 @@ const NewTaskButton = React.memo(props =>{
     }
 
     return <>
-        <button onClick={trigger}>Create New Task</button>
+        <Button onClick={trigger}>Create New Task</Button>
         { isOpen ? <NewTaskForm trigger={trigger} groupId={groupId} requestQuery={requestQuery}/> : null }
     </>
 }

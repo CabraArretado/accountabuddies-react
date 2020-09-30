@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, Redirect } from "react-router-dom";
-import { Button, Form, Input, FormGroup } from 'react-bootstrap';
+import Button from '@material-ui/core/Button';
+import { Form, Input, FormGroup } from 'react-bootstrap';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
 
 import API from "../../modules/data_module"
 
@@ -19,16 +22,22 @@ const SearchForum = React.memo(props => {
         props.setKeyWords(searchInput.current.value)
         setIsLoading(false);
     }
-    
+
 
 
     return <>
-            <Form onSubmit={search}>
-                <FormGroup className="form-row p-4">
-                    <input className="col my-2" type="text" ref={searchInput} name="search-input" id="search-input" placeholder="Search Group" />
-                    <Button disabled={isLoading} className="col" type="submit">Search Forum Posts</Button>
-                </FormGroup>
-            </Form>
+        <Grid container spacing={0}>
+        <Form onSubmit={search}>
+            <FormGroup className="form-row p-4">
+                    <Grid item xs={8}>
+                        <TextField id="outlined-basic" label="Search" variant="outlined" inputRef={searchInput} />
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Button color={"primary"} disabled={isLoading} className="col" type="submit">Search Forum Posts</Button>
+                    </Grid>
+            </FormGroup>
+        </Form>
+        </Grid>
     </>
 });
 

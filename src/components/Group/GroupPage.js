@@ -1,24 +1,35 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, Redirect } from "react-router-dom";
-import { Button, Form, Input, FormGroup } from 'react-bootstrap';
+import { Link, Redirect, withRouter } from "react-router-dom";
+
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 
 import API from "../../modules/data_module"
-import ForumMain from "../Forum/ForumMain"
-import TaskMain from "../Task/TaskMain"
+import ForumPreview from "../Forum/ForumPreview"
+import TaskPreview from "../Task/TaskPreview"
 
+const useStyles = makeStyles((theme) => ({
+    center: {
+        align: 'center',
+    },
+
+}));
 // moods
 
 const GroupPage = (props) => {
     const getMyGroups = props.getMyGroups
     let groupId = props.groupId
-    const [ group, setGroup ] = useState({})
-    const [ thisGroup, setThisGroup] = useState(props.groupId)
-    const [ created_by, setCreated_by] = useState({"first_name":""})
+    const [group, setGroup] = useState({})
+    const [thisGroup, setThisGroup] = useState(props.groupId)
+    const [created_by, setCreated_by] = useState({ "first_name": "" })
+    const classes = useStyles();
 
     const getUser = async () => {
         if (group.created_by !== undefined) {
-        const userQuery = await API.get("account", group.created_by)
-        setCreated_by(userQuery.user)
+            const userQuery = await API.get("account", group.created_by)
+            setCreated_by(userQuery.user)
         }
     }
     const getGroup = async () => {
@@ -26,34 +37,59 @@ const GroupPage = (props) => {
         setGroup(groupQuery)
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         getGroup()
 
-    },[groupId])
+    }, [groupId])
 
-    useEffect(()=>{
+    useEffect(() => {
         getUser()
-    },[group])
+    }, [group])
 
     const handleLeave = async (id) => {
         // getMyGroups()
     }
 
 
-    //TODO: formate the date
+    //TODO:   direction="row"
 
     return <>
-        <div className="container">
-            <h1>{group.title}</h1>
+        <Grid item container
+            direction="row"
+            justify="space-evenly"
+            alignItems="flex-start"
+            spacing={1}
+            xs={12}
+        >
+            {/* <Grid item xs={3} /> */}
 
-            {/* <button onClick={handleLeave}>Leave</button> */}
-            <h5>Created by: {created_by.first_name} in {group.created_at}</h5>
-            <h4>{group.description}</h4>
-            {/* <h3>{group.population}/{group.size}</h3> */}
-        </div>
-        <ForumMain groupId={thisGroup} />
-        <Link to={`/forum/${groupId}`}> Forum </Link>
-        <TaskMain groupId={thisGroup} />
+                <Paper elevation={0}>
+            <Grid item xs={12}>
+                <Typography variant={"subtitle1"}>Group</Typography>
+                    <Typography variant={"h2"}>{group.title}</Typography>
+
+                    <Typography variant={"subtitle2"}>Group created by: {created_by.first_name} in {group.created_at}</Typography>
+                    <Typography variant={"subtitle1"}>{group.description}</Typography>
+            </Grid>
+                </Paper>
+            {/* <Grid item xs={2} /> */}
+
+        </Grid>
+        <Grid item container
+            direction="row"
+            justify="space-evenly"
+            alignItems="flex-start"
+            spacing={1}
+            xs={12}
+        >
+            <Grid item xs={6}>
+                <ForumPreview groupId={thisGroup} />
+            </Grid>
+
+            <Grid item xs={6}>
+                <TaskPreview groupId={thisGroup} />
+            </Grid>
+        </Grid>
     </>
 };
 

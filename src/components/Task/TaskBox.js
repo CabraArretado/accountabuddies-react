@@ -1,8 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, Redirect } from "react-router-dom";
-import { Button, Form, Input, FormGroup } from 'react-bootstrap';
+import { Form, Input, FormGroup } from 'react-bootstrap';
 
 import API from "../../modules/data_module"
+
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 // moods
 
@@ -21,18 +27,32 @@ const TaskBox = (props) => {
         await requestQuery()
     }
 
-    console.log(requestQuery)
-
-
-
-
+    
     return <>
-        <div className="container">
-            <h1>{task.title}</h1>
-            <h2>{task.due}</h2>
-            <h4>{task.description}</h4>
-            { task.done ? <p>Done</p> : <button onClick={handleDone}>Mask As Done!</button>}
-        </div>
+        <Card>
+            <CardContent>
+                <Typography variant={"h5"} color="textSecondary" gutterBottom>
+                    {task.title}
+                </Typography>
+                <Typography variant={"h6"} color="textSecondary" gutterBottom>
+                    Due date: {task.due}
+                </Typography>
+                <Typography variant={"subtitle2"} color="textSecondary" gutterBottom>
+                    {task.description}
+                </Typography>
+            </CardContent>
+            <CardActions>
+                { 
+                    task.done ?
+                    <Typography variant={"subtitle2"} color="textSecondary" gutterBottom>
+                    Task done!
+                </Typography> : 
+                <Typography variant={"subtitle2"} color="textSecondary" gutterBottom>
+                    <Button onClick={handleDone}>Mask As Done!</Button>
+                </Typography>
+                }
+            </CardActions>
+        </Card>
     </>
 };
 
