@@ -121,7 +121,7 @@ export default function NavBar(props) {
             </AppBar>
         </div>
         { isAuthenticated() ?
-        <SimpleDrawer drawerOpen={drawerOpen} switchDrawer={switchDrawer}/>
+        <SimpleDrawer drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} switchDrawer={switchDrawer}/>
         :
         null }
         </>

@@ -63,7 +63,7 @@ const TaskBox = (props) => {
                     &#9989; Task done!
                 </Typography> : 
                 <Typography variant={"subtitle2"} color="textSecondary" gutterBottom>
-                    <Button className={classes.orange} onClick={handleDone}> Mask As Done!</Button>
+                    <Button className={classes.orange} onClick={handleDone}> &#9201; Mark As Done!</Button>
                 </Typography>
                 }
             </CardActions>

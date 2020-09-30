@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
     center: {
         align: 'center',
     },
+    hr: {
+        width: 12,
+    }
 
 }));
 // moods
@@ -76,6 +79,7 @@ const GroupPage = (props) => {
             {/* <Grid item xs={2} /> */}
 
         </Grid>
+        <hr className={classes.hr}/>
         <Grid item container
             direction="row"
             justify="space-evenly"

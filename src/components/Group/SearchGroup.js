@@ -1,8 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, Redirect } from "react-router-dom";
-import { Button, Form, Input, FormGroup } from 'react-bootstrap';
+import {  Redirect } from "react-router-dom";
+import { Form, Input, FormGroup } from 'react-bootstrap';
+
+import { formatDate } from "../Helpers"
 
 import API from "../../modules/data_module"
+
+import List from '@material-ui/core/List';
+
+
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import Divider from '@material-ui/core/Divider';
+import Avatar from '@material-ui/core/Avatar';
+
 
 // moods
 
@@ -24,8 +38,10 @@ const SearchGroup = React.memo(props => {
 
 
     return <>
-        <div className="container">
-            <h5 className="--page-title">Look for group</h5>
+        <Paper className="container">
+        <Typography variant={"h2"} color="textSecondary" gutterBottom>
+                    Search Groups
+            </Typography>
             <hr />
             <Form onSubmit={search}>
                 <FormGroup className="form-row p-4">
@@ -33,7 +49,7 @@ const SearchGroup = React.memo(props => {
                     <Button disabled={isLoading} className="col" type="submit">Search</Button>
                 </FormGroup>
             </Form>
-        </div>
+        </Paper>
     </>
 });
 

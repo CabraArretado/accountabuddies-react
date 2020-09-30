@@ -8,6 +8,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from "@material-ui/core/styles";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
+import HomeIcon from '@material-ui/icons/Home';
+import SearchIcon from '@material-ui/icons/Search';
+import BallotIcon from '@material-ui/icons/Ballot';
 
 
 import { Link, Route, Redirect, useHistory, withRouter } from 'react-router-dom';
@@ -19,13 +22,13 @@ const useStyles = makeStyles({
 });
 
 const SimpleDrawer = props => {
-  const { history, drawerOpen, switchDrawer } = props;
+  const { history, drawerOpen, switchDrawer, setDrawerOpen } = props;
   const classes = useStyles();
 
   const itemsList = [
     {
       text: "Home",
-      icon: <InboxIcon />,
+      icon: <HomeIcon />,
       onClick: () => {
         switchDrawer()
         history.push("/")
@@ -33,7 +36,7 @@ const SimpleDrawer = props => {
     },
     {
       text: "Search Groups",
-      icon: <MailIcon />,
+      icon: <SearchIcon />,
       onClick: () => {
         switchDrawer()
         history.push("/groups")
@@ -41,15 +44,24 @@ const SimpleDrawer = props => {
     },
     {
       text: "My Groups",
-      icon: <MailIcon />,
+      icon: <BallotIcon />,
       onClick: () => {
         switchDrawer()
         history.push("/my_groups")
       }
     }
   ];
+
+  function handleDrawerClose(){
+    setDrawerOpen(false)
+  }
+
   return (
-    <Drawer open={drawerOpen} className={classes.drawer}>
+    <Drawer
+    onEscapeKeyDown={handleDrawerClose}
+    onBackdropClick={handleDrawerClose}
+    open={drawerOpen}
+    className={classes.drawer}>
       <List>
         {itemsList.map((item, index) => {
           const { text, icon, onClick } = item;
