@@ -1,22 +1,38 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, Redirect } from "react-router-dom";
-import { Button, Form, Input, FormGroup } from 'react-bootstrap';
+import { withRouter } from "react-router-dom";
+import { Form, Input, FormGroup } from 'react-bootstrap';
+
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
 
 import API from "../../modules/data_module"
 
 // moods
 
 const ForumPreviewBox = (props) => {
-    let post = props.post
-    console.log(props.groupId)
-    let groupId = props.groupId
+    let { post, groupId, history } = props
+
+    const goForum = () => {
+        console.log(post)
+        history.push(`/forum/${groupId}/${post.id}`)
+    }
 
     return <>
-        <div className="container">
-            <Link to={`/forum/${groupId}/${post.id}`}><h1>{post.title}</h1></Link>
-            <h4>{post.description}</h4>
-        </div>
+        <Card>
+            <CardContent>
+                <Typography variant={"h5"} color="textSecondary" gutterBottom>
+                    <Link onClick={goForum}> {post.title} </Link>
+                </Typography>
+                <Typography variant={"h7"} color="textSecondary" gutterBottom>
+                    {post.content}
+                </Typography>
+            </CardContent>
+        </Card>
     </>
 };
 
-export default ForumPreviewBox;
+export default withRouter(ForumPreviewBox);

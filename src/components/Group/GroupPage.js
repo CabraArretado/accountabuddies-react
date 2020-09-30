@@ -8,7 +8,7 @@ import Paper from '@material-ui/core/Paper';
 
 import API from "../../modules/data_module"
 import ForumPreview from "../Forum/ForumPreview"
-import TaskMain from "../Task/TaskMain"
+import TaskPreview from "../Task/TaskPreview"
 
 const useStyles = makeStyles((theme) => ({
     center: {
@@ -63,14 +63,15 @@ const GroupPage = (props) => {
         >
             {/* <Grid item xs={3} /> */}
 
-            <Grid item xs={4}>
                 <Paper elevation={0}>
+            <Grid item xs={12}>
+                <Typography variant={"subtitle1"}>Group</Typography>
                     <Typography variant={"h2"}>{group.title}</Typography>
 
                     <Typography variant={"subtitle2"}>Group created by: {created_by.first_name} in {group.created_at}</Typography>
                     <Typography variant={"subtitle1"}>{group.description}</Typography>
-                </Paper>
             </Grid>
+                </Paper>
             {/* <Grid item xs={2} /> */}
 
         </Grid>
@@ -83,11 +84,10 @@ const GroupPage = (props) => {
         >
             <Grid item xs={6}>
                 <ForumPreview groupId={thisGroup} />
-                <Link to={`/forum/${groupId}`}> Forum </Link>
             </Grid>
 
             <Grid item xs={6}>
-                <TaskMain groupId={thisGroup} />
+                <TaskPreview groupId={thisGroup} />
             </Grid>
         </Grid>
     </>

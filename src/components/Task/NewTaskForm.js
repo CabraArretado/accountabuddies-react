@@ -1,6 +1,11 @@
 import React, { useRef } from "react"
 import { useHistory, withRouter } from "react-router-dom"
-import { Button, Form, Input, FormGroup } from 'react-bootstrap';
+import { Form, FormGroup } from 'react-bootstrap';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Input from '@material-ui/core/Input';
+import Divider from '@material-ui/core/Divider';
+import Paper from '@material-ui/core/Paper';
 
 import API from "../../modules/data_module"
 
@@ -30,37 +35,47 @@ const NewTaskForm = props => {
 
     return (
         <>
+        <Paper>
             <Form className="form--login" onSubmit={handleNewTask}>
-                <fieldset>
-                    <label htmlFor="inputTitle"> Title </label>
-                    <input ref={title} type="text"
-                        className="form-control"
-                        placeholder="Email"
-                        required autoFocus />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="inputContent"> Content </label>
-                    <input ref={description} type="text"
+                <TextField
+                        inputRef={title}
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="title"
+                        label="Task Name"
+                        name="email"
+                        autoFocus
+                    />
+                <TextField
+                        inputRef={description}
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
                         id="description"
-                        className="form-control"
-                        placeholder="Content"
-                        required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="inputContent"> Due Date </label>
-                    <input ref={due}
+                        label="Task Description"
+                        name="description"
+                    />
+                <Input
+                        inputRef={due}
+                        required
                         type="datetime-local"
+                        margin="normal"
+                        fullWidth
                         id="due"
-                        className="form-control"
-                        placeholder="Content"
-                        required />
-                </fieldset>
+                        label="Due Date"
+                        name="due"
+                    />
                 <fieldset>
+                <Divider />
                     <Button type="submit">
                         Create
                     </Button>
                 </fieldset>
             </Form>
+        </Paper>
         </>
     )
 }

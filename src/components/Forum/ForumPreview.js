@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
+import Divider from '@material-ui/core/Divider';
 
 // Mods
 import API from "../../modules/data_module"
@@ -52,16 +53,18 @@ const ForumPreview = (props) => {
     },[])
 
     return <>
-        <Paper className="container">
+        <Paper>
             <Typography variant={"h4"} style={{"align": "center"}}>
-            <Link href="#" onClick={goForum}>
+            <Link onClick={goForum}>
                 Forum 
             </Link>
             </Typography>
+            <Divider />
             { posts.length > 0 ? 
-            posts.map(post => <ForumPreviewBox groupId={groupId} key={post.id} post={post} groupId={groupId} />) 
-            : <Typography variant={"h7"} style={{"align": "center"}}>Forum doesn't have any post yet! Create the first post! </Typography>
+            posts.map(post => <React.Fragment key={post.id}><ForumPreviewBox groupId={groupId} post={post} groupId={groupId} /> <Divider /> </React.Fragment>) 
+            : <Typography variant={"h6"} style={{"align": "center"}}>Forum doesn't have any post yet! Create the first post! </Typography>
             }
+            <Divider variant={"middle"}/>
             <NewPostButton groupId={groupId} />
         </Paper>
     </>
