@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, Redirect } from "react-router-dom";
-import { Button, Form, Input, FormGroup } from 'react-bootstrap';
+import { Form, Input, FormGroup } from 'react-bootstrap';
 import {getMyGroups} from "../../App"
+import Button from '@material-ui/core/Button';
 
 import API from "../../modules/data_module"
 
@@ -21,7 +22,7 @@ const NewCommentaryButton = React.memo(props =>{
     }
 
     return <>
-        <button onClick={trigger}>New Commentary</button>
+        <Button onClick={trigger}>New Commentary</Button>
         { isOpen ? <NewCommentaryForm postId={postId} trigger={trigger} groupId={groupId} getCommentaries={getCommentaries}/> : null }
     </>
 }

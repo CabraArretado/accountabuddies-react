@@ -9,10 +9,16 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import JoinGroupButton from "./JoinGroupButton"
 import LinkMUI from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 275,
+    width: 300,
+    height: 300,
+  },
+  bot: {
+    bottom: 2,
   },
   bullet: {
     display: 'inline-block',
@@ -30,43 +36,48 @@ const useStyles = makeStyles({
 function GroupBox(props) {
 
   const classes = useStyles();
-  const { group, getMyGroups, my_link, history }  = props
+  const { group, getMyGroups, my_link, history } = props
 
 
   const handleAccessGroup = (e) => {
-        // e.preventDefault()
-        history.push(`groups/${group.id}`)
+    history.push(`groups/${group.id}`)
   }
 
   const bull = <span className={classes.bullet}>•</span>;
 
   return (
-    <Card className={classes.root} variant="outlined">
-      <CardContent>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
-            Group
-        </Typography>
-        <Typography variant="h5" component="h2">
-        { my_link ? <>
-            <LinkMUI onClick={handleAccessGroup} color="inherit">{group.title}</LinkMUI>
-        </>
-        : <>
-        { group.title }
-        </>
-        }
-        </Typography>
-        <Typography className={classes.pos} color="textSecondary">
-          Open
-        </Typography>
-        <Typography variant="body2" component="p">
-        {group.description}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        {/* <Button size="small">Learn More</Button> */}
-        { props.is_my_group ? null : <JoinGroupButton getMyGroups={getMyGroups} groupId={group.id} history={history} {...props}/>  }
-      </CardActions>
-    </Card>
+    <>
+      <Grid container align={"center"}>
+        <Card className={classes.root} variant="outlined">
+          <Grid container alignContent={"center"}>
+            <CardContent>
+              <Typography className={classes.title} color="textSecondary" gutterBottom>
+                Group
+                  </Typography>
+              <Typography variant="h5" component="h2" className={classes.mytitle}>
+                {my_link ? <>
+                  <LinkMUI onClick={handleAccessGroup} color="inherit">{group.title}</LinkMUI>
+                </>
+                  : <>
+                    {group.title}
+                  </>
+                }
+              </Typography>
+              <Typography className={classes.pos} color="textSecondary">
+                Open
+                </Typography>
+
+              <Typography variant="body2" component="p">
+                {group.description}
+              </Typography>
+            </CardContent>
+            <CardActions className={classes.bot}>
+              {props.is_my_group ? null : <JoinGroupButton getMyGroups={getMyGroups} groupId={group.id} history={history} {...props} />}
+            </CardActions>
+          </Grid>
+        </Card>
+      </Grid>
+    </>
   );
 }
 

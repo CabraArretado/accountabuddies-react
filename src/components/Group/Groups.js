@@ -1,17 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, Redirect } from "react-router-dom";
-import { Button, Form, Input, FormGroup } from 'react-bootstrap';
+import { Link, Redirect, withRouter } from "react-router-dom";
+import { Form, Input, FormGroup } from 'react-bootstrap';
+
+import Button from '@material-ui/core/Button';
 
 // Mods
 import API from "../../modules/data_module"
 import SearchGroup from "./SearchGroup"
 import GroupBox from "./GroupBox"
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+import Divider from '@material-ui/core/Divider';
 
 
 const Groups = (props) => {
     let props_reference = props
-    const myGroups = props.myGroups
-    const getMyGroups = props.getMyGroups
+    const { myGroups, getMyGroups, history } = props.myGroups
 
     // Variables
     const [isLoading, setIsLoading] = useState(false); // Button is loading
@@ -32,23 +37,35 @@ const Groups = (props) => {
         }
     }
 
+    const goCreate = () => {
+        props.history.push("/create_group")
+    }
+
 
     //Effect
-    useEffect(()=>{
+    useEffect(() => {
         requestQuery(keyWords)
-    },[keyWords, myGroups])
+    }, [keyWords, myGroups])
 
 
     return <>
-        <section className="container">
-            <h5 className="">Groups</h5>
-            <SearchGroup {...props_reference} groups={groups} requestQuery={requestQuery} setKeyWords={setKeyWords}/>
+        <Grid item container align={"center"} xs={12}>
+            <Paper className="container">
+                <SearchGroup {...props_reference} groups={groups} requestQuery={requestQuery} setKeyWords={setKeyWords} />
+                <Grid item container xs={12} justify="space-evenly" spacing={2}>
+                    {
+                        groups.map(group => <React.Fragment key={group.id}>
+                        <Grid item xs={4}>
+                            <GroupBox getMyGroups={props_reference.getMyGroups} group={group} is_my_gorup={false} />
+                        </Grid>
+                    </React.Fragment>)
+                    }
+                </Grid>
 
-            { groups.map(group => <GroupBox key={group.id} getMyGroups={props_reference.getMyGroups} group={group}  is_my_gorup={false}/>) }
-
-        </section>
-        <Link to="/create_group">Create Group</Link>
+                <Button onClick={goCreate}>Create Group</Button>
+            </Paper>
+        </Grid>
     </>
 };
 
-export default Groups;
+export default withRouter(Groups);

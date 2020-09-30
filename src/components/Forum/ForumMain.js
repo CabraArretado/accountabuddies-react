@@ -54,7 +54,9 @@ const ForumMain = (props) => {
 
     return <>
         <Paper className="container">
-            <Typography variant={"h5"} style={{"align": "center"}}>Forum </Typography>
+        <Typography variant={"h2"} color="textSecondary" gutterBottom>
+                    Forum
+            </Typography>
             <NewPostButton groupId={groupId} />
             <SearchForum {...props_reference} requestQuery={requestQuery} setKeyWords={setKeyWords}/>
 

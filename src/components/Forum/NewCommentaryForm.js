@@ -1,14 +1,28 @@
 import React, { useRef } from "react"
+
 import { useHistory, withRouter } from "react-router-dom"
-import { Button, Form, Input, FormGroup } from 'react-bootstrap';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
 
 import API from "../../modules/data_module"
+import { Paper } from "@material-ui/core";
+
 
 // Login Working
 const NewCommentaryForm = props => {
-    let groupId = props.groupId
-    let postId = props.postId
-    let getCommentaries = props.getCommentaries
+
+    let { groupId, postId, getCommentaries } = props
 
     const title = useRef()
     const content = useRef()
@@ -28,28 +42,34 @@ const NewCommentaryForm = props => {
 
     return (
         <>
-            <Form className="form--login" onSubmit={handleCommentary}>
-                <fieldset>
-                    <label htmlFor="inputTitle"> Title </label>
-                    <input ref={title} type="text"
-                        className="form-control"
-                        placeholder="Title"
-                        required autoFocus />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="inputContent"> Content </label>
-                    <input ref={content} type="text"
-                        id="password"
-                        className="form-control"
-                        placeholder="Content"
-                        required />
-                </fieldset>
-                <fieldset>
-                    <Button type="submit">
+        <Grid>
+        <Paper>
+            <Container component="main" maxWidth="xs">
+                <form className="" noValidate>
+                    <TextField
+                        inputRef={title}
+                        required
+                        id="commentary-title"
+                        label="New Commentary Title"
+                        autoFocus
+                    />
+                    <TextField
+                        inputRef={content}
+                        required
+                        fullWidth
+                        multiline
+                        rows={4}
+                        id="commentary-content"
+                        label="New Commentary Content"
+                        name="commentary-content"
+                    />
+                    <Button onClick={handleCommentary}>
                         Post
                     </Button>
-                </fieldset>
-            </Form>
+                </form>
+            </Container>
+        </Paper>
+        </Grid>
         </>
     )
 }

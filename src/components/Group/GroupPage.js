@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import { formatDate } from "../Helpers"
 
 import API from "../../modules/data_module"
 import ForumPreview from "../Forum/ForumPreview"
@@ -14,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
     center: {
         align: 'center',
     },
+    hr: {
+        width: 12,
+    }
 
 }));
 // moods
@@ -68,13 +72,14 @@ const GroupPage = (props) => {
                 <Typography variant={"subtitle1"}>Group</Typography>
                     <Typography variant={"h2"}>{group.title}</Typography>
 
-                    <Typography variant={"subtitle2"}>Group created by: {created_by.first_name} in {group.created_at}</Typography>
+                    <Typography variant={"subtitle2"}>Created by {created_by.first_name + " " + created_by.last_name} in {formatDate(group.created_at)}</Typography>
                     <Typography variant={"subtitle1"}>{group.description}</Typography>
             </Grid>
                 </Paper>
             {/* <Grid item xs={2} /> */}
 
         </Grid>
+        <hr className={classes.hr}/>
         <Grid item container
             direction="row"
             justify="space-evenly"
