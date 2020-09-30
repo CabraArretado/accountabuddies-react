@@ -13,8 +13,8 @@ In the project directory, you can run:
 ### Running the App
 Make sure your API is running.
 Clone the Account-a-buddies-React repository for the React client.
-```cd```` into the project directory.
-````npm install````
+```cd``` into the project directory.
+```npm install```
 ```npm start```
 
 Runs the app in the development mode.<br />
