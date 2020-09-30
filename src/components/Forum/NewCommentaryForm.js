@@ -59,9 +59,9 @@ const NewCommentaryForm = props => {
                         fullWidth
                         multiline
                         rows={4}
-                        id="comentary_content"
+                        id="commentary-content"
                         label="New Commentary Content"
-                        name="comentary_content"
+                        name="commentary-content"
                     />
                     <Button onClick={handleCommentary}>
                         Post

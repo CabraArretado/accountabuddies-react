@@ -8,24 +8,57 @@ import NewCommentaryButton from "./NewCommentaryButton"
 import DeleteButton from "./DeleteButton"
 import EditPostButton from "./EditPostButton"
 import EditPostForm from "./EditPostForm"
+import List from '@material-ui/core/List';
+
 
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import { Divider } from '@material-ui/core';
+import Divider from '@material-ui/core/Divider';
+import Avatar from '@material-ui/core/Avatar';
 
 // moods
 
+const useStyles = makeStyles((theme) => ({
+    text: {
+        padding: theme.spacing(2, 2, 0),
+    },
+    paper: {
+        paddingBottom: 50,
+    },
+    list: {
+        marginBottom: theme.spacing(2),
+    },
+    subheader: {
+        backgroundColor: theme.palette.background.paper,
+    },
+    appBar: {
+        top: 'auto',
+        bottom: 0,
+    },
+    grow: {
+        flexGrow: 1,
+    },
+    fabButton: {
+        position: 'absolute',
+        zIndex: 1,
+        top: -30,
+        left: 0,
+        right: 0,
+        margin: '0 auto',
+    },
+}));
+
 const PostDetails = (props) => {
-    let groupId = props.groupId
-    let postId = props.postId
-    let profile = props.profile
+    let { groupId, postId, profile } = props
 
     const [editing, setEditing] = useState(false)
     const trigger = () => {
         setEditing(!editing)
     }
+
+    const classes = useStyles();
 
     const [commentaries, setCommentaries] = useState([])
     const [post, setPost] = useState({ "title": "", "created_by": "", "created_at": "", "description": "" })
@@ -64,10 +97,22 @@ const PostDetails = (props) => {
                     }
                 </Paper>
             </Grid>
-            <Divider />
-            <Grid item xs={12} align={"center"}>
+        </Grid>
+
+        <Divider />
+
+        <Grid container align={"center"}>
+            <Grid xs={2} />
+            <Grid item xs={8}>
                 <Paper>
-                    {commentaries.map(commentary => <CommentaryBox id={post.id} groupId={groupId} commentary={commentary} key={commentary.id} profile={profile} getCommentaries={getCommentaries} />)}
+                    <List className={classes.list}>
+                        {commentaries.map(commentary => <React.Fragment key={commentary.id}>
+
+                            <CommentaryBox id={post.id} groupId={groupId} commentary={commentary} profile={profile} getCommentaries={getCommentaries} />
+                            <Divider />
+
+                        </React.Fragment>)}
+                    </List>
                     <NewCommentaryButton postId={postId} groupId={groupId} getCommentaries={getCommentaries} />
                 </Paper>
             </Grid>
@@ -76,3 +121,16 @@ const PostDetails = (props) => {
 };
 
 export default PostDetails;
+
+{/* <List className={classes.list}>
+{messages.map(({ id, primary, secondary, person }) => (
+  <React.Fragment key={id}>
+    <ListItem button>
+      <ListItemAvatar>
+        <Avatar alt="Profile Picture" src={person} />
+      </ListItemAvatar>
+      <ListItemText primary={primary} secondary={secondary} />
+    </ListItem>
+  </React.Fragment>
+))}
+</List> */}
