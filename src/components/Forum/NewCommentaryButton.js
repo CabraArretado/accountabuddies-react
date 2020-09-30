@@ -22,7 +22,7 @@ const NewCommentaryButton = React.memo(props =>{
     }
 
     return <>
-        <Button onClick={trigger}>New Commentary</Button>
+        <Button variant="contained" onClick={trigger}>New Commentary</Button>
         { isOpen ? <NewCommentaryForm postId={postId} trigger={trigger} groupId={groupId} getCommentaries={getCommentaries}/> : null }
     </>
 }

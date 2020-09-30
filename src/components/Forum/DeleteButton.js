@@ -28,7 +28,7 @@ const DeleteButton = React.memo(props =>{
     }
 
     return <>
-        <Button onClick={handleDelete}>Delete</Button>
+        <Button variant="contained" onClick={handleDelete}>Delete</Button>
     </>
 }
 )

@@ -184,8 +184,7 @@ const Register = props => {
                     </Grid>
                 </form>
             </div>
-            <Box mt={5}>
-                <Copyright />
+            <Box mt={8}>
             </Box>
         </Container>
     );

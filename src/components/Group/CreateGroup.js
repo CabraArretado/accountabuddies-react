@@ -1,8 +1,21 @@
 import React, { useRef, useState } from "react"
 import { withRouter } from "react-router-dom"
-import { Button, Form, Input, FormGroup } from 'react-bootstrap';
 import API from "../../modules/data_module"
 
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import Input from '@material-ui/core/Input';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import Paper from "@material-ui/core/Paper";
 
 
 const CreateGroup = props => {
@@ -36,49 +49,51 @@ const CreateGroup = props => {
         const new_group = {
             "title": title.current.value,
             "description": description.current.value,
-            "size": size.current.value
+            "size": 5
             }
 
         create_group(new_group).then(() => {
             getMyGroups()
             props.history.push({
-                pathname: "/"
+                pathname: "/my_groups"
             })
         })
     }
-
     return (
-        <main style={{ textAlign: "center" }}>
-            <Form className="form--login" onSubmit={handleGroup}>
-                <h1 className="h3 mb-3 font-weight-normal">Create a group</h1>
-                <fieldset>
-                    <label htmlFor="firstName"> Group's Title </label>
-                    <input ref={title} type="text"
-                        name="title"
-                        className="form-control"
-                        placeholder="Title"
-                        required autoFocus />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="lastName"> Description </label>
-                    <input ref={description} type="text"
-                        name="description"
-                        className="form-control"
-                        placeholder="Description"
-                        required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="size"> Group's size </label>
-                    <input ref={size} type="number" min="2" max="5"
-                        required />
-                </fieldset>
-                <fieldset>
-                    <Button type="submit">
-                        Create
-                    </Button>
-                </fieldset>
-            </Form>
-        </main>
+        <>
+            <Grid align={"center"}>
+                <Typography variant="h2">Create New Group</Typography>
+                <Paper>
+                    <Container component="main" maxWidth="xs">
+                        <form className="" noValidate>
+                            <TextField
+                                inputRef={title}
+                                required
+                                id="new-group-title"
+                                label="Group Name"
+                                autoFocus
+                            />
+                            <TextField
+                                inputRef={description}
+                                required
+                                fullWidth
+                                multiline
+                                rows={4}
+                                id="new-group-description"
+                                label="Group Content"
+                                name="new-group-description"
+                            />
+                            <Box mt={2} />
+                            <Button variant="contained" onClick={handleGroup}>
+                            Create
+                        </Button>
+                        </form>
+                    </Container>
+                    <Box mt={8} />
+                </Paper>
+            </Grid>
+        </>
     )
 }
+
 export default withRouter(CreateGroup)

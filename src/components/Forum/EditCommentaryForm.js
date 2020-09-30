@@ -83,34 +83,4 @@ const EditCommentaryForm = props => {
         </>
     )
 }
-
-//     return (
-//         <>
-//             <Form className="form--login" onSubmit={handleEdit}>
-//                 <fieldset>
-//                     <input ref={title} type="text"
-//                         className="form-control"
-//                         placeholder="Title"
-//                         defaultValue={commentary.title}
-//                         required autoFocus />
-//                 </fieldset>
-//                 <fieldset>
-//                     <label htmlFor="inputContent"> Content </label>
-//                     <input ref={content} type="text"
-//                         id="content"
-//                         className="form-control"
-//                         placeholder="Content"
-//                         defaultValue={commentary.content}
-//                         required />
-//                 </fieldset>
-//                 <fieldset>
-//                     <Button type="submit">
-//                         Confirm Edition
-//                     </Button>
-//                 </fieldset>
-//             </Form>
-//         </>
-//     )
-// }
-
 export default EditCommentaryForm

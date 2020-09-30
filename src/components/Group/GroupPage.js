@@ -10,6 +10,7 @@ import { formatDate } from "../Helpers"
 import API from "../../modules/data_module"
 import ForumPreview from "../Forum/ForumPreview"
 import TaskPreview from "../Task/TaskPreview"
+import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles((theme) => ({
     center: {
@@ -58,6 +59,7 @@ const GroupPage = (props) => {
     //TODO:   direction="row"
 
     return <>
+    <Paper>
         <Grid item container
             direction="row"
             justify="space-evenly"
@@ -95,6 +97,8 @@ const GroupPage = (props) => {
                 <TaskPreview groupId={thisGroup} />
             </Grid>
         </Grid>
+            <Box mt={8} />
+            </Paper>
     </>
 };
 

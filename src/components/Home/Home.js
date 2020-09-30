@@ -2,6 +2,7 @@ import React, { useRef } from "react"
 import { useHistory, Link } from "react-router-dom"
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
 
 
 const Home = props => {
@@ -40,6 +41,7 @@ const Home = props => {
             <Typography component="h1" variant="h6">
             Join in a group or create one!
             </Typography>
+            <Box mt={8} />
         </main>
     )
 }

@@ -58,6 +58,11 @@ const TaskPreview = (props) => {
             <Divider />
             <NewTaskButton groupId={groupId} requestQuery={requestQuery}/>
             <Divider variant={"middle"}/>
+            { tasks.length == 0 && <>
+            <Typography variant={"h6"} color="textSecondary" gutterBottom>
+                    Looks like this group doesn't have any task! Be the first to create!
+            </Typography>
+            </> }
             { tasks.map( task => <React.Fragment key={task.id}>
             <TaskBox task={task} requestQuery={requestQuery} /> <Divider />
             </React.Fragment>) }

@@ -60,12 +60,13 @@ const ForumPreview = (props) => {
             </Link>
             </Typography>
             <Divider />
+            <NewPostButton groupId={groupId} />
+            <Divider />
             { posts.length > 0 ? 
             posts.map(post => <React.Fragment key={post.id}><ForumPreviewBox groupId={groupId} post={post} groupId={groupId} /> <Divider /> </React.Fragment>) 
             : <Typography variant={"h6"} style={{"align": "center"}}>Forum doesn't have any post yet! Create the first post! </Typography>
             }
             <Divider variant={"middle"}/>
-            <NewPostButton groupId={groupId} />
         </Paper>
     </>
 };

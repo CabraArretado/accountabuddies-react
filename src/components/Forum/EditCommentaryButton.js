@@ -14,7 +14,7 @@ const EditPostButton = props =>{
     }
 
     return <>
-        <Button onClick={handleEdit}>Edit</Button>
+        <Button variant="contained" onClick={handleEdit}>Edit</Button>
     </>
 }
 

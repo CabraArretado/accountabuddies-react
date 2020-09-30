@@ -12,6 +12,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
+import Box from '@material-ui/core/Box';
 
 
 const Groups = (props) => {
@@ -52,17 +53,21 @@ const Groups = (props) => {
         <Grid item container align={"center"} xs={12}>
             <Paper className="container">
                 <SearchGroup {...props_reference} groups={groups} requestQuery={requestQuery} setKeyWords={setKeyWords} />
-                <Grid item container xs={12} justify="space-evenly" spacing={2}>
+                <Grid item xs={12} justify="center" spacing={2}>
                     {
                         groups.map(group => <React.Fragment key={group.id}>
-                        <Grid item xs={4}>
+
+                        <Grid align={"center"} alignContent={"center"} item xs={12}>
                             <GroupBox getMyGroups={props_reference.getMyGroups} group={group} is_my_gorup={false} />
                         </Grid>
+
                     </React.Fragment>)
                     }
                 </Grid>
-
-                <Button onClick={goCreate}>Create Group</Button>
+                <Grid item xs={12} justify="space-evenly" spacing={2}>
+                    <Button variant="contained" onClick={goCreate}>Create Group</Button>
+                </Grid>
+            <Box mt={8} />
             </Paper>
         </Grid>
     </>
