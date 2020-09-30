@@ -25,7 +25,7 @@ const MyGroups = (props) => {
     <Grid container>
     <Grid item xs={12}>
         <Typography variant={"h2"} color="textSecondary" gutterBottom>
-                    My Groups
+                    My Groups 
             </Typography>
                 { myGroups.map(group => <React.Fragment key={group.id}> <GroupBox my_link={true} is_my_group={true} group={group}/>  <Divider variant={"middle"}/></React.Fragment>) }
         </Grid>
