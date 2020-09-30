@@ -26,7 +26,7 @@ const ForumPreviewBox = (props) => {
                 <Typography variant={"h5"} color="textSecondary" gutterBottom>
                     <Link onClick={goForum}> {post.title} </Link>
                 </Typography>
-                <Typography variant={"h7"} color="textSecondary" gutterBottom>
+                <Typography variant={'subtitle1'} color="textSecondary" gutterBottom>
                     {post.content}
                 </Typography>
             </CardContent>

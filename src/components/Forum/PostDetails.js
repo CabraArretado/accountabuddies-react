@@ -9,6 +9,12 @@ import DeleteButton from "./DeleteButton"
 import EditPostButton from "./EditPostButton"
 import EditPostForm from "./EditPostForm"
 
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import { Divider } from '@material-ui/core';
+
 // moods
 
 const PostDetails = (props) => {
@@ -16,13 +22,13 @@ const PostDetails = (props) => {
     let postId = props.postId
     let profile = props.profile
 
-    const [ editing, setEditing ] = useState(false)
+    const [editing, setEditing] = useState(false)
     const trigger = () => {
         setEditing(!editing)
     }
 
-    const [ commentaries, setCommentaries ] = useState([])
-    const [ post, setPost ] = useState({"title":"", "created_by": "", "created_at": "", "description":""})
+    const [commentaries, setCommentaries] = useState([])
+    const [post, setPost] = useState({ "title": "", "created_by": "", "created_at": "", "description": "" })
 
     const getPost = async () => {
         const query = await API.get("forum_post", postId)
@@ -35,30 +41,37 @@ const PostDetails = (props) => {
     }
 
 
-    useEffect(()=>{
+    useEffect(() => {
         getPost()
         getCommentaries()
-    },[])
+    }, [])
 
     //TODO: formate the date
 
     return <>
-        <div className="container">
-        { 
-            editing ? 
-            <EditPostForm trigger={trigger} groupId={groupId} getPost={getPost} table={"forum_post"} id={post.id} post={post}/> 
-            : <>
-            <h1>{post.title}</h1>
-            <h5>Posted by: {post.created_by.first_name} in {post.created_at}</h5>
-            <h4>{post.content}</h4>
-            { post.created_by.id == profile.id ? <> <DeleteButton groupId={groupId} getPost={getPost} table={"forum_post"} id={post.id} />  <EditPostButton trigger={trigger}  /> </>: null }
-        </>
-        }
-        </div>
-        <div>
-            { commentaries.map(commentary => <CommentaryBox id={post.id} groupId={groupId} commentary={commentary} key={commentary.id} profile={profile} getCommentaries={getCommentaries}/>) }
-        </div>
-        <NewCommentaryButton postId={postId} groupId={groupId} getCommentaries={getCommentaries} />
+        <Grid container align={"center"}>
+            <Grid item xs={12}>
+                <Paper>
+                    {
+                        editing ?
+                            <EditPostForm trigger={trigger} groupId={groupId} getPost={getPost} table={"forum_post"} id={post.id} post={post} />
+                            : <>
+                                <h1>{post.title}</h1>
+                                <h5>Posted by: {post.created_by.first_name} in {post.created_at}</h5>
+                                <h4>{post.content}</h4>
+                                {post.created_by.id == profile.id ? <> <DeleteButton groupId={groupId} getPost={getPost} table={"forum_post"} id={post.id} />  <EditPostButton trigger={trigger} /> </> : null}
+                            </>
+                    }
+                </Paper>
+            </Grid>
+            <Divider />
+            <Grid item xs={12} align={"center"}>
+                <Paper>
+                    {commentaries.map(commentary => <CommentaryBox id={post.id} groupId={groupId} commentary={commentary} key={commentary.id} profile={profile} getCommentaries={getCommentaries} />)}
+                    <NewCommentaryButton postId={postId} groupId={groupId} getCommentaries={getCommentaries} />
+                </Paper>
+            </Grid>
+        </Grid>
     </>
 };
 
