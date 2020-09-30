@@ -1,11 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, Redirect, withRouter } from "react-router-dom";
+
+import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 
 import API from "../../modules/data_module"
-import ForumMain from "../Forum/ForumMain"
+import ForumPreview from "../Forum/ForumPreview"
 import TaskMain from "../Task/TaskMain"
 
+const useStyles = makeStyles((theme) => ({
+    center: {
+        align: 'center',
+    },
+
+}));
 // moods
 
 const GroupPage = (props) => {
@@ -14,6 +24,7 @@ const GroupPage = (props) => {
     const [group, setGroup] = useState({})
     const [thisGroup, setThisGroup] = useState(props.groupId)
     const [created_by, setCreated_by] = useState({ "first_name": "" })
+    const classes = useStyles();
 
     const getUser = async () => {
         if (group.created_by !== undefined) {
@@ -50,17 +61,17 @@ const GroupPage = (props) => {
             spacing={1}
             xs={12}
         >
-        <Grid item xs={3}>
-            {/* Grid to center */}
-        </Grid>
-            <Grid item xs={8}>
-                <h1>{group.title}</h1>
+            {/* <Grid item xs={3} /> */}
 
-                <h5>Created by: {created_by.first_name} in {group.created_at}</h5>
-                <h4>{group.description}</h4>
-                {/* <h3>{group.population}/{group.size}</h3> */}
+            <Grid item xs={4}>
+                <Paper elevation={0}>
+                    <Typography variant={"h2"}>{group.title}</Typography>
+
+                    <Typography variant={"subtitle2"}>Group created by: {created_by.first_name} in {group.created_at}</Typography>
+                    <Typography variant={"subtitle1"}>{group.description}</Typography>
+                </Paper>
             </Grid>
-            <Grid item xs={2} />{/* Grid to center */}
+            {/* <Grid item xs={2} /> */}
 
         </Grid>
         <Grid item container
@@ -71,7 +82,7 @@ const GroupPage = (props) => {
             xs={12}
         >
             <Grid item xs={6}>
-                <ForumMain groupId={thisGroup} />
+                <ForumPreview groupId={thisGroup} />
                 <Link to={`/forum/${groupId}`}> Forum </Link>
             </Grid>
 

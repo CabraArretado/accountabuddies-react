@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { Button, Form, Input, FormGroup } from 'react-bootstrap';
 
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import Link from '@material-ui/core/Link';
 
 // Mods
 import API from "../../modules/data_module"
@@ -14,17 +15,14 @@ import ForumPreviewBox from "./ForumPreviewBox"
 import NewPostButton from "./NewPostButton"
 
 
-const ForumMain = (props) => {
+const ForumPreview = (props) => {
     let props_reference = props
-    const myGroups = props.myGroups
-    const groupId = props.groupId
+    const { myGroups, groupId, history } = props
 
     // Variables
     const [isLoading, setIsLoading] = useState(false); // Button is loading
-    const [nothingFound, setNothingFound] = useState(false); // trigger to the Nothing Found info
-
-    const [keyWords, setKeyWords] = useState("")
-    const [posts, setPosts] = useState([]) 
+    const [posts, setPosts] = useState([])
+    const [nothingFound, setNothingFound] = useState(false);
 
     const requestQuery = async (keywords=null) => {
         /*
@@ -37,30 +35,36 @@ const ForumMain = (props) => {
         }
         const list = await API.getCustom("forum_post", query);
         if (list.length === 0) {
-            setNothingFound(true);
             setPosts([]);
         }
         else if (list.length >= 1) {
             setPosts(list);
-            setNothingFound(false);
         }
     }
 
 
-    //Effect
+    const goForum = () => {
+        history.push(`/forum/${groupId}`)
+    }
+
     useEffect(()=>{
-        requestQuery(keyWords)
-    },[keyWords])
+        requestQuery()
+    },[])
 
     return <>
         <Paper className="container">
-            <Typography variant={"h5"} style={{"align": "center"}}>Forum </Typography>
+            <Typography variant={"h4"} style={{"align": "center"}}>
+            <Link href="#" onClick={goForum}>
+                Forum 
+            </Link>
+            </Typography>
+            { posts.length > 0 ? 
+            posts.map(post => <ForumPreviewBox groupId={groupId} key={post.id} post={post} groupId={groupId} />) 
+            : <Typography variant={"h7"} style={{"align": "center"}}>Forum doesn't have any post yet! Create the first post! </Typography>
+            }
             <NewPostButton groupId={groupId} />
-            <SearchForum {...props_reference} requestQuery={requestQuery} setKeyWords={setKeyWords}/>
-
-            { posts.map(post => <ForumPreviewBox groupId={groupId} key={post.id} post={post} groupId={groupId} />) }
         </Paper>
     </>
 };
 
-export default ForumMain;
+export default withRouter(ForumPreview);

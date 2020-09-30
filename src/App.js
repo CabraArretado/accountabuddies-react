@@ -24,18 +24,22 @@ function App() {
 
 
 const theme = createMuiTheme({
-  palette: {
-    type: "dark",
-    // primary: {
-    //   // Purple and green play nicely together.
-    //   main: blue,
-    // },
-    // secondary: {
-    //   // This is green.A700 as hex.
-    //   main: blue,
-    // },
+//   palette: {
+//     type: "dark",
+//     primary: {
+//         light: '#819ca9',
+//         main: '#546e7a',
+//         dark: '#29434e',
+//         contrastText: '#fafafa',
+//       },
+//       secondary: {
+//         light: '#ff5f52',
+//         main: '#c62828',
+//         dark: '#8e0000',
+//         contrastText: '#fafafa',
+//       },
 
-  },
+//   },
 });
 
 
