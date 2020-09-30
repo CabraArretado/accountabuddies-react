@@ -7,6 +7,8 @@ import API from "../../modules/data_module"
 import TaskBox from "./TaskBox"
 import NewTaskButton from "./NewTaskButton"
 
+import Typography from '@material-ui/core/Typography';
+
 
 const TaskMain = (props) => {
     let props_reference = props
@@ -26,8 +28,6 @@ const TaskMain = (props) => {
         let query = `group=${groupId}`
         const list = await API.getCustom("task", query);
         
-
-        console.log("works!")
         if (list.length >= 1) {
             setTasks(list);
         }
@@ -42,7 +42,9 @@ const TaskMain = (props) => {
 
     return <>
         <section className="container">
-            <h5 className="">Tasks </h5>
+            <Typography variant={"h2"} color="textSecondary" gutterBottom>
+                    Tasks
+            </Typography>
             <NewTaskButton groupId={groupId} requestQuery={requestQuery}/>
             { tasks.map( task => <TaskBox key={task.id} task={task} requestQuery={requestQuery} />) }
         </section>
