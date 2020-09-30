@@ -17,7 +17,6 @@ const ForumPreviewBox = (props) => {
     let { post, groupId, history } = props
 
     const goForum = () => {
-        console.log(post)
         history.push(`/forum/${groupId}/${post.id}`)
     }
 
