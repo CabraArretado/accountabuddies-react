@@ -20,7 +20,7 @@ const NewTaskButton = React.memo(props =>{
     }
 
     return <>
-        <Button onClick={trigger}>Create New Task</Button>
+        <Button variant={"contained"} onClick={trigger}>Create New Task</Button>
         { isOpen ? <NewTaskForm trigger={trigger} groupId={groupId} requestQuery={requestQuery}/> : null }
     </>
 }

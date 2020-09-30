@@ -5,9 +5,12 @@ import { Route } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import Link from '@material-ui/core/Link';
+import Typography from '@material-ui/core/Typography'
 
 import ApplicationViews from './components/ApplicationViews';
 import NavBar from "./components/NavBar/NavBar"
+import Box from '@material-ui/core/Box';
 import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -154,6 +157,20 @@ const theme = createMuiTheme({
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    function Copyright() {
+        return (
+            <Typography variant="body2" color="textSecondary" align="center">
+                {'Copyright © '}
+                <Link color="inherit" href="http://localhost:3000/">
+                    Account-a-buddies
+                </Link>{' '}
+
+                {new Date().getFullYear()}
+                {'.'}
+            </Typography>
+        );
+    }
+
     return (
         <>
             <ThemeProvider theme={theme}>
@@ -188,8 +205,13 @@ const theme = createMuiTheme({
                                 myGroupsId={myGroupsId} />
                         </Grid>
                     </Router>
+
                 </Paper>
             </ThemeProvider>
+            <Box mt={8}>
+                <Copyright />
+            </Box>
+            <Box mt={8} />
         </>
 
     );

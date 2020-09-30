@@ -6,6 +6,7 @@ import { Button, Form, Input, FormGroup } from 'react-bootstrap';
 import API from "../../modules/data_module"
 import TaskBox from "./TaskBox"
 import NewTaskButton from "./NewTaskButton"
+import Box from '@material-ui/core/Box';
 
 import Typography from '@material-ui/core/Typography';
 
@@ -46,7 +47,13 @@ const TaskMain = (props) => {
                     Tasks
             </Typography>
             <NewTaskButton groupId={groupId} requestQuery={requestQuery}/>
-            { tasks.map( task => <TaskBox key={task.id} task={task} requestQuery={requestQuery} />) }
+            { tasks.length == 0 && <>
+            <Typography variant={"h6"} color="textSecondary" gutterBottom>
+                    Looks like this group doesn't have any task! Be the first to create!
+            </Typography>
+            </> }
+            { tasks.length > 0 && tasks.map( task => <TaskBox key={task.id} task={task} requestQuery={requestQuery} />) }
+        <Box mt={8} />
         </section>
     </>
 };

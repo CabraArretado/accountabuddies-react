@@ -14,8 +14,8 @@ import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles({
   root: {
-    width: 300,
-    height: 300,
+    width: 700,
+    height: 220,
   },
   bot: {
     bottom: 2,
@@ -47,13 +47,15 @@ function GroupBox(props) {
 
   return (
     <>
-      <Grid container align={"center"}>
         <Card className={classes.root} variant="outlined">
-          <Grid container alignContent={"center"}>
+
+          <Grid item xs={8} >
             <CardContent>
+
               <Typography className={classes.title} color="textSecondary" gutterBottom>
                 Group
                   </Typography>
+
               <Typography variant="h5" component="h2" className={classes.mytitle}>
                 {my_link ? <>
                   <LinkMUI onClick={handleAccessGroup} color="inherit">{group.title}</LinkMUI>
@@ -63,6 +65,7 @@ function GroupBox(props) {
                   </>
                 }
               </Typography>
+
               <Typography className={classes.pos} color="textSecondary">
                 Open
                 </Typography>
@@ -70,13 +73,17 @@ function GroupBox(props) {
               <Typography variant="body2" component="p">
                 {group.description}
               </Typography>
+
             </CardContent>
-            <CardActions className={classes.bot}>
-              {props.is_my_group ? null : <JoinGroupButton getMyGroups={getMyGroups} groupId={group.id} history={history} {...props} />}
-            </CardActions>
+          </Grid>
+
+          <Grid item xs={1}>
+              <CardActions>
+                {props.is_my_group ? null : <JoinGroupButton getMyGroups={getMyGroups} groupId={group.id} history={history} {...props} />}
+              </CardActions>
           </Grid>
         </Card>
-      </Grid>
+        <hr style={{ height: 10 }} />
     </>
   );
 }

@@ -138,7 +138,6 @@ const Login = props => {
                 </form>
             </div>
             <Box mt={8}>
-                <Copyright />
             </Box>
         </Container>
     );

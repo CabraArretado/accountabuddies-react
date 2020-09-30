@@ -12,6 +12,7 @@ import API from "../../modules/data_module"
 import SearchForum from "./SearchForum"
 import ForumPreviewBox from "./ForumPreviewBox"
 import NewPostButton from "./NewPostButton"
+import Box from '@material-ui/core/Box';
 
 
 const ForumMain = (props) => {
@@ -59,8 +60,11 @@ const ForumMain = (props) => {
             </Typography>
             <NewPostButton groupId={groupId} />
             <SearchForum {...props_reference} requestQuery={requestQuery} setKeyWords={setKeyWords}/>
-
+            { posts.length == 0 && <>
+                <Typography variant={"h6"} style={{"align": "center"}}>Forum doesn't have any post yet! Create the first post! </Typography>
+            </>}
             { posts.map(post => <ForumPreviewBox groupId={groupId} key={post.id} post={post} groupId={groupId} />) }
+            <Box mt={8} />
         </Paper>
     </>
 };
