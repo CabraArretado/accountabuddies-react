@@ -30,18 +30,15 @@ function ordinal_suffix_of(i) {
     return i + "th";
 }
 
-export const formatDate = (date) => {
-    let stringDate = new Date(date);
+export const formatDate = (input) => {
+    let stringDate = new Date(input);
 
     let date = stringDate.getDate();
     let month = stringDate.getMonth(); 
     let year = stringDate.getFullYear();
 
     let monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    let daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-    let ordinalDate = ordinal_suffix_of(date) + " " + monthNames[month] + ", " + year;
-
-    return daysOfWeek[stringDate.getDay()] + ", " + ordinalDate
+    return ordinal_suffix_of(date) + " " + monthNames[month] + ", " + year;
 
 }

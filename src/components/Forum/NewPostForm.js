@@ -47,8 +47,8 @@ const NewPostForm = props => {
                             <TextField
                                 inputRef={title}
                                 required
-                                id="commentary-title"
-                                label="New Commentary Title"
+                                id="post-title"
+                                label="New Post Title"
                                 autoFocus
                             />
                             <TextField
@@ -58,8 +58,8 @@ const NewPostForm = props => {
                                 multiline
                                 rows={4}
                                 id="commentary-content"
-                                label="New Commentary Content"
-                                name="commentary-content"
+                                label="New Post Content"
+                                name="post-content"
                             />
                             <Button onClick={handlePost}>
                                 Post

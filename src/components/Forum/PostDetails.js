@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, Redirect } from "react-router-dom";
-import { Button, Form, Input, FormGroup } from 'react-bootstrap';
+import { formatDate } from "../Helpers"
 
 import API from "../../modules/data_module"
 import CommentaryBox from "./CommentaryBox"
@@ -90,7 +90,7 @@ const PostDetails = (props) => {
                             <EditPostForm trigger={trigger} groupId={groupId} getPost={getPost} table={"forum_post"} id={post.id} post={post} />
                             : <>
                                 <Typography variant="h3">{post.title}</Typography>
-                                <Typography variant="subtitle2">Posted by {post.created_by.first_name} in {post.created_at}</Typography>
+                                <Typography variant="subtitle2">Posted by {post.created_by.first_name} in {formatDate(post.created_at)}</Typography>
                                 <Typography variant="h6">{post.content}</Typography>
                                 {post.created_by.id == profile.id ? <> <DeleteButton groupId={groupId} getPost={getPost} table={"forum_post"} id={post.id} />  <EditPostButton trigger={trigger} /> </> : null}
                             </>

@@ -19,6 +19,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import Avatar from '@material-ui/core/Avatar';
 
+import { formatDate } from "../Helpers"
+
 // moods
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -72,7 +74,7 @@ const CommentaryBox = (props) => {
                             variant="caption"
                             color="textPrimary"
                         >
-                            {commentary.created_at}
+                            {formatDate(commentary.created_at)}
                         </Typography>
                         
                         <Typography
