@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/Menu';
+import Switch from '@material-ui/core/Switch';
 
 import { useHistory } from 'react-router-dom';
 import SimpleDrawer from "./Drawer"
@@ -47,7 +48,12 @@ const useStyles = makeStyles((theme) => ({
 export default function NavBar(props) {
 
     const history = useHistory();
-    const {setIsLoggedIn, isAuthenticated, logout, myGroups, profile, darkMode, switchDark} = props
+    const setIsLoggedIn = props.setIsLoggedIn
+    const {darkMode, switchDark} = props
+    const isAuthenticated = props.auth.isAuthenticated
+    const logout = props.auth.logout
+    const myGroups = props.myGroups
+    const profile = props.profile
 
     const classes = useStyles();
 
@@ -102,7 +108,7 @@ export default function NavBar(props) {
                         Account-a-buddies
                     </Typography>
                     <div className={classes.grow} />
-                    
+                    <Switch checked={darkMode} onChange={switchDark} name="DarkMode" />
                     { isAuthenticated() ? <>
                         <MenuItem onClick={handleMyProfile}>My Profile</MenuItem>
                         <MenuItem onClick={handleLogout}>Logout</MenuItem>

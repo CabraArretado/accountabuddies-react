@@ -167,7 +167,11 @@ const lightTheme = createMuiTheme({
     const getProfile = async () => {
         if (auth.isAuthenticated()) {
             const i = await API.getCustom("account", "myself=True")
+            try{
             setProfile(i[0].user)
+            } catch {
+                
+            }
             return i
         } else {
             setProfile({})
