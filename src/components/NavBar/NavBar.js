@@ -47,11 +47,7 @@ const useStyles = makeStyles((theme) => ({
 export default function NavBar(props) {
 
     const history = useHistory();
-    const setIsLoggedIn = props.setIsLoggedIn
-    const isAuthenticated = props.auth.isAuthenticated
-    const logout = props.auth.logout
-    const myGroups = props.myGroups
-    const profile = props.profile
+    const {setIsLoggedIn, isAuthenticated, logout, myGroups, profile, darkMode, switchDark} = props
 
     const classes = useStyles();
 

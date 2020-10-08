@@ -33,13 +33,15 @@ const Home = props => {
             Accountability?
             </Typography>
             <Typography component="h1" variant="h6">
-            Yes! By explicating and monitoring some bad habit to other people we become more self-aware and start to eliminate them by ourselves! 
+            Yes! By explicating and monitoring some bad habit with other people, we become more self-aware and start to eliminate them by ourselves! 
             </Typography>
+            <br />
+            <br />
             <Typography className={classes.questions}  component="h1" variant="h4">
             How can I do that?
             </Typography>
             <Typography component="h1" variant="h6">
-            Join in a group or create one!
+            Join a group or create one! And find your account-a-buddy!
             </Typography>
             <Box mt={8} />
         </main>

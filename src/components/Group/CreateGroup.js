@@ -23,7 +23,6 @@ const CreateGroup = props => {
     const description = useRef()
     const size = useRef()
     const getMyGroups = props.getMyGroups
-    console.log(getMyGroups)
 
     const [group, setGroup] = useState({})
     
