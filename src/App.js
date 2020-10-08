@@ -24,26 +24,48 @@ import API from "./modules/data_module"
 
 function App() {
 
+    const [ darkMode, setDarkMode ] = useState(false)
+
+    const switchDark = () => {
+        setDarkMode(!darkMode)
+    }
 
 
-const theme = createMuiTheme({
-//   palette: {
-//     type: "dark",
-//     primary: {
-//         light: '#819ca9',
-//         main: '#546e7a',
-//         dark: '#29434e',
-//         contrastText: '#fafafa',
-//       },
-//       secondary: {
-//         light: '#ff5f52',
-//         main: '#c62828',
-//         dark: '#8e0000',
-//         contrastText: '#fafafa',
-//       },
-
-//   },
+const darkTheme = createMuiTheme({
+  palette: {
+    type: "dark",
+    primary: {
+        light: '#819ca9',
+        main: '#546e7a',
+        dark: '#29434e',
+        contrastText: '#fafafa',
+      },
+      secondary: {
+        light: '#ff5f52',
+        main: '#c62828',
+        dark: '#8e0000',
+        contrastText: '#fafafa',
+      },
+  },
 });
+
+const lightTheme = createMuiTheme({
+    palette: {
+      type: "light",
+      primary: {
+          light: '#819ca9',
+          main: '#546e7a',
+          dark: '#29434e',
+          contrastText: '#fafafa',
+        },
+        secondary: {
+          light: '#ff5f52',
+          main: '#c62828',
+          dark: '#8e0000',
+          contrastText: '#fafafa',
+        },
+    },
+  });
 
 
     // AUTHENTICATION FEATURES
@@ -134,7 +156,8 @@ const theme = createMuiTheme({
         /*
         Just changes the MyGroupsId to the current group set
         */
-        setMyGroupsId(myGroups.map(group => group.id))
+       if(myGroups.length > 0){
+        setMyGroupsId(myGroups.map(group => group.id))}
     }, [myGroups])
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -144,7 +167,11 @@ const theme = createMuiTheme({
     const getProfile = async () => {
         if (auth.isAuthenticated()) {
             const i = await API.getCustom("account", "myself=True")
+            try{
             setProfile(i[0].user)
+            } catch {
+                
+            }
             return i
         } else {
             setProfile({})
@@ -173,7 +200,7 @@ const theme = createMuiTheme({
 
     return (
         <>
-            <ThemeProvider theme={theme}>
+            <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
                 <Paper>
                     <CssBaseline />
                     <Router>
@@ -183,6 +210,8 @@ const theme = createMuiTheme({
                             <Route render={props => (
                                 <NavBar
                                     setIsLoggedIn={setIsLoggedIn}
+                                    darkMode={darkMode}
+                                    switchDark={switchDark}
                                     auth={auth} {...props}
                                     myGroups={myGroups} />
                             )} />

@@ -15,9 +15,9 @@ const JoinGroupButton = props => {
             group: groupId
         }
 
-        await API.post("group_user", newRelation).then(
-            getMyGroups()
-        ).then( history.push(`groups/${groupId}`))
+        await API.post("group_user", newRelation)
+        await getMyGroups()
+        history.push(`groups/${groupId}`)
 
         setIsLoading(false)
     }
