@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/Menu';
 import Switch from '@material-ui/core/Switch';
+import WbSunnyIcon from '@material-ui/icons/WbSunny';
+import Brightness3Icon from '@material-ui/icons/Brightness3';
 
 import { useHistory } from 'react-router-dom';
 import SimpleDrawer from "./Drawer"
@@ -55,6 +57,7 @@ export default function NavBar(props) {
     const myGroups = props.myGroups
     const profile = props.profile
 
+    // Styles
     const classes = useStyles();
 
     const [drawerOpen, setDrawerOpen] = useState(false)
@@ -108,7 +111,9 @@ export default function NavBar(props) {
                         Account-a-buddies
                     </Typography>
                     <div className={classes.grow} />
-                    <Switch checked={darkMode} onChange={switchDark} name="DarkMode" />
+                    <WbSunnyIcon />
+                    <Switch color="default" checked={darkMode} onChange={switchDark} name="DarkMode" />
+                    <Brightness3Icon />
                     { isAuthenticated() ? <>
                         <MenuItem onClick={handleMyProfile}>My Profile</MenuItem>
                         <MenuItem onClick={handleLogout}>Logout</MenuItem>
