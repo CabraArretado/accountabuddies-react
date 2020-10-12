@@ -34,36 +34,36 @@ function App() {
 const darkTheme = createMuiTheme({
   palette: {
     type: "dark",
-    primary: {
-        light: '#819ca9',
-        main: '#546e7a',
-        dark: '#29434e',
-        contrastText: '#fafafa',
-      },
-      secondary: {
-        light: '#ff5f52',
-        main: '#c62828',
-        dark: '#8e0000',
-        contrastText: '#fafafa',
-      },
+    // primary: {
+    //     light: '#819ca9',
+    //     main: '#546e7a',
+    //     dark: '#29434e',
+    //     contrastText: '#fafafa',
+    //   },
+    //   secondary: {
+    //     light: '#ff5f52',
+    //     main: '#c62828',
+    //     dark: '#8e0000',
+    //     contrastText: '#fafafa',
+    //   },
   },
 });
 
 const lightTheme = createMuiTheme({
     palette: {
       type: "light",
-      primary: {
-          light: '#819ca9',
-          main: '#546e7a',
-          dark: '#29434e',
-          contrastText: '#fafafa',
-        },
-        secondary: {
-          light: '#ff5f52',
-          main: '#c62828',
-          dark: '#8e0000',
-          contrastText: '#fafafa',
-        },
+    //   primary: {
+    //       light: '#819ca9',
+    //       main: '#546e7a',
+    //       dark: '#29434e',
+    //       contrastText: '#fafafa',
+    //     },
+    //     secondary: {
+    //       light: '#ff5f52',
+    //       main: '#c62828',
+    //       dark: '#8e0000',
+    //       contrastText: '#fafafa',
+    //     },
     },
   });
 
