@@ -57,6 +57,7 @@ export default function NavBar(props) {
     const myGroups = props.myGroups
     const profile = props.profile
 
+    // Styles
     const classes = useStyles();
 
     const [drawerOpen, setDrawerOpen] = useState(false)
