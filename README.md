@@ -2,8 +2,6 @@
 
 Front-end app build in React.js and Material UI
 
-## Updates comming.
-
 Front-end  React.js project supposed to work with [Account-a-buddies API](https://github.com/felipetempus/accountabuddies-API) as Back-End.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
